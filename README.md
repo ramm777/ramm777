@@ -1,5 +1,4 @@
 ![Business card](Business_card_2.jpg)
-  
   # Hello, guys!
   I’m Aidan Kubeyev and I'm a Computational Scientist and a Modeller: 
   1) Data-driven/machine learning 
