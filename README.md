@@ -1,5 +1,5 @@
 # Business card
-![Business card](Business card 2.pdf)
+![Business card](Business card 2.jpg)
 
 - Hi, I’m Aidan (@ramm777) 👋
 - I’m interested in Data Science, Machine Learning, Scientific Computing and Modelling
