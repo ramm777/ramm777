@@ -1,3 +1,6 @@
+# Business card
+![Business card](Business card 2.pdf)
+
 - Hi, I’m Aidan (@ramm777) 👋
 - I’m interested in Data Science, Machine Learning, Scientific Computing and Modelling
 - I’m looking to collaborate on interesting projects
@@ -8,4 +11,4 @@ ramm777/ramm777 is a ✨ special ✨ repository because its `README.md` (this fi
 You can click the Preview link to take a look at your changes.
 🌱 I’m currently learning more DS to become an expert
 --->
-![Happy Christmas](Business card 2.pdf)
+
