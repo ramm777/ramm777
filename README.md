@@ -1,7 +1,8 @@
-![Business card](Business_card_2.jpg)
-  # Hello, guys!
+![Business card](1639824048651.jpeg)
+# Hello, guys!
 I’m a Computational Scientist at Concr, working on developing and applying machine learning modelling techniques to help identify and treat cancer. Previously, I worked in the UK oil & gas industry, where I focused on mathematical and numerical modelling and optimization studies. 
-Besides, I’ve got academic experience with a specialization in research software development and deep learning for computer vision projects. I have an MSc in Engineering from Imperial College London and PhD in Computational Physics from Heriot-Watt University in Edinburgh, where I was awarded a prestigious James Watt scholarship. 
+
+Besides, I’ve got academic experience in computational physics research software and deep learning for computer vision. I have an MSc in Engineering from Imperial College London and PhD in Computational Physics from Heriot-Watt University in Edinburgh. 
 
  Email: 77777aidan@gmail.com.
 
