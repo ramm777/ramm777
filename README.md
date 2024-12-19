@@ -2,8 +2,14 @@
 
 Hello, guys! I'm a Scientist in Machine Learning and Computational Science. Over the past 5 years, I've specialized in creating machine learning products for the biotechnology and energy industries. I love the intersection between science and real-world problems. I typically work on private repositories, but here are a few standout projects we've published:
 
-## 1) 
-Provide a brief description of the project, including its purpose, main features, and technologies used.
+## 1) Integrated ML Predictor of Clinical Trials
+We have developed a method that employs Bayesian statistics to accurately forecast the outcomes of clinical trials in the course of novel drug development. The development of an oncology drug currently incurs a cost exceeding £4 billion, given the high failure rate of approximately 95%. Our proposed Digital Twin can simulate a clinical trial and predict novel drug outcomes, thereby improving and mitigating risks in the clinical development of oncology therapeutics. 
+- It uses multi-modal data: genetics (like RNAseq), clinical, image data and chemical compounds data
+- We integrate XGBoost, Gaussian Process and Survival Modelling into one model
+- We validate our model against past clinical trials and use standard ML validation methods 
+
+
+
 
 ## 2) 
 Provide a brief description of the project, including its purpose, main features, and technologies used.
