@@ -11,8 +11,13 @@ We have developed a method that employs Bayesian statistics to accurately foreca
 ![Predictor_Clinical_Trials](Predictor_Clinical_Trials.png)
 
 
-## 2) 
-Provide a brief description of the project, including its purpose, main features, and technologies used.
+## 2) Use Computer Vision to Identify Cell Types on the Medical Images 
+We developed a deep-learning model to identify types of cells (tumour cells, lymphs and fibroblasts) from the medical images. The model aimed to help pathologists who spend a lot of time diagnosing cancer and help other ML models in predicting treatment outcomes. The model was trained with annotated images from a breast cancer dataset and was validated by a pathologist. The results showed that the model could accurately identify the cells, especially TILs, which it identified even better than a pathologist. 
+
+![Cell_Type_Identification](Cell_Type_Identification.png)
+
+We employed a U-Net architecture for semantic segmentation, training the model on the NuCLS dataset annotated for cell types. The dataset, comprising images from the TCGA for breast cancer, was split into training and validation/testing sets. The model's performance was validated by an expert pathologist, demonstrating promising results with an AUROC of 0.864 and 0.901, along with balanced and standard accuracies. The model offers a tool that can enhance precision treatment by integrating it into complex predictive modelling systems. 
+
 
 ## 3) 
 Provide a brief description of the project, including its purpose, main features, and technologies used.
