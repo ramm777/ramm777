@@ -25,10 +25,13 @@ Here, I designed and created a deep learning model that combines computer vision
 
 ![Deep_Learning_Physics](Deep_Learning_Physics.png)
 
+## 4) Physics-based Computer Vision Method for Simulation
+
+I created a research software tool (Physics-based Computer Vision Method) and methodology that takes digital images as inputs, performs predictive modelling, and identifies key performance indicators (KPIs) for energy, oil&gas and climate change projects. The model focuses on understanding and simulating how stress affects the permeability of rough fracture surfaces during the surface deformation process, using a combination of numerical contact mechanics, numerical modelling and the Stokes equation. This approach allows for the simulation of mechanical deformation and fluid flow in natural fractures with complex geometries. The software accurately predicts the stress-permeability relationship, helping to provide valuable insights for hydro-mechanical studies of geological formations. This tool significantly reduces computation time, providing quick and accurate results that can inform better decision-making in energy and climate change projects.
+
+
+
 --------
-
-![Business card](1639824048651.jpeg)
-
 
 <!---
 ramm777/ramm777 is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
