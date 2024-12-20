@@ -8,7 +8,7 @@ We have developed a method that employs Bayesian statistics to accurately foreca
 - We integrate XGBoost, Gaussian Process and Survival Modelling into one model
 - We validate our model against past clinical trials and use standard ML validation methods 
 
-
+![Predictor_Clinical_Trials](Predictor_Clinical_Trials.png)
 
 
 ## 2) 
