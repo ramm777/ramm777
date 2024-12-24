@@ -18,7 +18,7 @@ A preprint is available on the [MedRxiv](https://www.medrxiv.org/content/10.1101
 
 
 
-## 2) Use Computer Vision to Identify Cell Types on the Medical Images 
+## 2) Computer Vision ML to Identify Cell Types on the Medical Images 
 We developed a deep-learning model to identify types of cells (tumour cells, lymphs and fibroblasts) from the medical images. The model aimed to help pathologists who spend a lot of time diagnosing cancer and help other ML models in predicting treatment outcomes. The model was trained with annotated images from a breast cancer dataset and was validated by a pathologist. The results showed that the model could accurately identify the cells, especially TILs, which it identified even better than a pathologist. 
 
 <p align="center"> <img src="Cell_Type_Identification.png" alt="Cell_Type_Identification" width="700"> </p>
