@@ -8,13 +8,14 @@ We have developed a method that employs Bayesian statistics to accurately foreca
 - We integrate XGBoost, Gaussian Process and Survival Modelling into one model
 - We validate our model against past clinical trials and use standard ML validation methods 
 
-![Predictor_Clinical_Trials](Predictor_Clinical_Trials.png)
+
+<p align="center"> <img src="Predictor_Clinical_Trials.png" alt="Predictor_Clinical_Trials" width="700"> </p>
 
 
 ## 2) Use Computer Vision to Identify Cell Types on the Medical Images 
 We developed a deep-learning model to identify types of cells (tumour cells, lymphs and fibroblasts) from the medical images. The model aimed to help pathologists who spend a lot of time diagnosing cancer and help other ML models in predicting treatment outcomes. The model was trained with annotated images from a breast cancer dataset and was validated by a pathologist. The results showed that the model could accurately identify the cells, especially TILs, which it identified even better than a pathologist. 
 
-![Cell_Type_Identification](Cell_Type_Identification.png)
+<p align="center"> <img src="Cell_Type_Identification.png" alt="Cell_Type_Identification" width="800"> </p>
 
 We employed a U-Net architecture for semantic segmentation, training the model on the NuCLS dataset annotated for cell types. The dataset, comprising images from the TCGA for breast cancer, was split into training and validation/testing sets. The model's performance was validated by an expert pathologist, demonstrating promising results with an AUROC of 0.864 and 0.901, along with balanced and standard accuracies. The model offers a tool that can enhance precision treatment by integrating it into complex predictive modelling systems. 
 
@@ -23,7 +24,7 @@ We employed a U-Net architecture for semantic segmentation, training the model o
 
 Here, I designed and created a deep learning model that combines computer vision and physics for the physics-based simulation. Solving multi-physics problems usually requires expensive, high-performance computers and complex code. The model helps and explores how machine learning can reduce computation time in these kinds of problems. It uses a deep learning model, specifically a convolutional neural network, to predict rough fracture permeability from digital images during the fracture deformation process. Even in extrapolation tests with different fracture roughness, the model maintained high accuracy with about 8% MAPE. I show that my method is able to speed up the numerical simulation up to 20 times faster than the conventional methods.
 
-![Deep_Learning_Physics](Deep_Learning_Physics.png)
+<p align="center"> <img src="Deep_Learning_Physics.png" alt="Deep_Learning_Physics" width="800"> </p>
 
 ## 4) Physics-based Computer Vision Method for Energy, Oil&Gas, Climate Change and Earthquakes projects
 
@@ -47,6 +48,7 @@ This model is part of the Integrated ML Predictor of Clinical Trials and answers
 <!---
 ![Multi-modal_ML](Multi-modal_ML.png)
 ![Physics_based_Computer_Vision](Physics_based_Computer_Vision.png)
+![Predictor_Clinical_Trials](Predictor_Clinical_Trials.png)
 
 ramm777/ramm777 is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 You can click the Preview link to take a look at your changes.
