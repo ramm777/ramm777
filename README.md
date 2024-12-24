@@ -15,7 +15,7 @@ We have developed a method that employs Bayesian statistics to accurately foreca
 ## 2) Use Computer Vision to Identify Cell Types on the Medical Images 
 We developed a deep-learning model to identify types of cells (tumour cells, lymphs and fibroblasts) from the medical images. The model aimed to help pathologists who spend a lot of time diagnosing cancer and help other ML models in predicting treatment outcomes. The model was trained with annotated images from a breast cancer dataset and was validated by a pathologist. The results showed that the model could accurately identify the cells, especially TILs, which it identified even better than a pathologist. 
 
-<p align="center"> <img src="Cell_Type_Identification.png" alt="Cell_Type_Identification" width="800"> </p>
+<p align="center"> <img src="Cell_Type_Identification.png" alt="Cell_Type_Identification" width="700"> </p>
 
 We employed a U-Net architecture for semantic segmentation, training the model on the NuCLS dataset annotated for cell types. The dataset, comprising images from the TCGA for breast cancer, was split into training and validation/testing sets. The model's performance was validated by an expert pathologist, demonstrating promising results with an AUROC of 0.864 and 0.901, along with balanced and standard accuracies. The model offers a tool that can enhance precision treatment by integrating it into complex predictive modelling systems. 
 
@@ -42,6 +42,16 @@ Accurate modelling of the impact of patient-specific features and cancer treatme
 I show that combining multi-modal data features enhances model predictive accuracy, up to AUC 0.82 on unseen test data. Results depict differential accuracy measured by a time-integrated Area Under the Curve (AUC), weighted Concordance Index and Brier index. The predictive accuracy improved stepwise by adding additional relevant data types. 
 
 This model is part of the Integrated ML Predictor of Clinical Trials and answers questions like "What is the recommended treatment for a 52-year-old patient with stage 3 breast cancer, ER+ve, HER2-ve, genetic information e.g FGFR2 copy number gain?"
+
+
+## 6) ML to predict tissue of origin from mutation data
+
+Cancer of Unknown Primary (CUP) is a clinical condition with a poor prognosis. Patients present with metastatic tumours for which the primary tissue of origin cannot be easily determined. The current standard of care relies on identifying the primary tissue of origin using radiological investigations, tumour marker assessment, and biopsy. For one-third of CUP patients, the origin of the primary tumour cannot be found, making it difficult to choose the best chemotherapy regime and preventing access to targeted and immune therapies. 
+
+<p align="center"> <img src="Tumour-of-Origin.png" alt="Tumour-of-Origin" width="700"> </p>
+
+We train a Machine Learning classifier to predict the tissue type of a solid tumour using only whole exome somatic mutation information. This was presented at the [AACR conference](https://aacrjournals.org/cancerres/article/83/7_Supplement/5429/719629/Abstract-5429-Using-machine-learning-to-predict).
+
 
 --------
 
