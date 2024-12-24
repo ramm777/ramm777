@@ -37,6 +37,8 @@ I created a research software tool (Physics-based Computer Vision Method) and me
 
 Accurate modelling of the impact of patient-specific features and cancer treatments on survival allows the assignment of targeted therapy. Delivering personalized medicine to select the “best” cancer treatment for the individual is challenging. There is a need to build a multi-source data-driven model for the survival analysis of breast cancer. I developed an ML model that integrates multi-modal data - genetic, hormone, clinical, and therapy data - to predict survival for breast cancer patients. 
 
+![Multi-modal_ML](Multi-modal_ML.png)
+
 
 
 --------
