@@ -14,7 +14,7 @@ We validate our model by comparing its outputs against the actual historical cli
 
 <p align="center"> <img src="Predictor_Clinical_Trials.png" alt="Predictor_Clinical_Trials" width="700"> </p>
 
-I have an older preprint on the [MedRxiv](https://www.medrxiv.org/content/10.1101/2024.01.17.24301444v1), the newer and significantly better is being reviewed. Please let me know if you'd like to receive it.
+I have an older preprint on the [MedRxiv](https://www.medrxiv.org/content/10.1101/2024.01.17.24301444v1), the newer and significantly better is being reviewed. Let me know if you'd like to receive it.
 
 ## 2) Computer Vision ML to Identify Cell Types on the Medical Images 
 We developed a deep-learning model to identify types of cells (tumour cells, lymphocytes, and fibroblasts) from medical images. The model was utilized to investigate the impact of image features on the modelling of clinical trials for drug discovery and predicting treatment outcomes. Additionally, it could assist pathologists, who spend a considerable amount of time on diagnostics, by improving their productivity.
@@ -31,16 +31,19 @@ We presented it at the [AACR conference](https://aacrjournals.org/cancerres/arti
 
 ## 3) Hybrid “Deep Learning + Physics” Computer Vision Model
 
-Here, I designed and created a deep learning model that combines computer vision and physics for the physics-based simulation. Solving multi-physics problems usually requires expensive, high-performance computers and complex code. The model helps and explores how machine learning can reduce computation time in these kinds of problems. It uses a deep learning model, specifically a convolutional neural network, to predict rough fracture permeability from digital images during the fracture deformation process. Even in extrapolation tests with different fracture roughness, the model maintained high accuracy with about 8% MAPE. I show that my method is able to speed up the numerical simulation up to 20 times faster than the conventional methods.
+Here, I designed and created a deep learning model that combines computer vision deep learning and physics for the physics-based simulation. Solving multi-physics problems usually requires expensive, high-performance computers and complex code. The model helps and explores how machine learning can reduce computation time in these kinds of problems. It uses a deep learning model, specifically a convolutional neural network, to predict rough fracture permeability from digital images during the fracture deformation process. Even in extrapolation tests with different fracture roughness, the model maintained high accuracy with about 8% MAPE. I show that my method is able to speed up the numerical simulation up to 20 times faster than the conventional fully physics-based methods.
 
 <p align="center"> <img src="Deep_Learning_Physics.png" alt="Deep_Learning_Physics" width="800"> </p>
 
+I published it in the [Engineering Applications of Artificial Intelligence](https://www.sciencedirect.com/science/article/abs/pii/S0952197623007467) journal in 2023. 
+
 ## 4) Physics-based Computer Vision Method for Energy, Oil&Gas, Climate Change and Earthquakes projects
 
-I created a research software tool (Physics-based Computer Vision Method) and methodology that takes digital images as inputs, performs predictive modelling, and identifies key performance indicators (KPIs) for energy, oil&gas and climate change projects. The model focuses on understanding and simulating how stress affects the permeability of rough fracture surfaces during the surface deformation process, using a combination of numerical contact mechanics, numerical modelling and the Stokes equation. This approach allows for the simulation of mechanical deformation and fluid flow in natural fractures with complex geometries. The software accurately predicts the stress-permeability relationship, helping to provide valuable insights for hydro-mechanical studies of geological formations. This tool significantly reduces computation time, providing quick and accurate results that can inform better decision-making in energy and climate change projects.
+I created a research software tool (Physics-based Computer Vision Method) and methodology that takes digital images as inputs, performs predictive modelling, and identifies key performance indicators (KPIs) for energy, oil&gas and climate change projects. The model focuses on understanding and simulating how stress affects the permeability of rough fracture surfaces during the surface deformation process, using a combination of numerical contact mechanics, numerical modelling and the Stokes equation. This approach allows for the simulation of mechanical deformation and fluid flow in natural fractures with complex geometries. The software accurately predicts the stress-permeability relationship, helping to provide valuable insights for hydro-mechanical studies of geological formations. This tool significantly reduces computation time, providing quick and accurate results that can inform better decision-making in energy, oil&gas and climate change projects, such as GCCS. 
 
 <p align="center"> <img src="Physics_based_Computer_Vision.png" alt="Physics_based_Computer_Vision" width="700"> </p>
 
+I published it in the [Transport in Porous Media](https://link.springer.com/article/10.1007/s11242-021-01719-7), which focuses on the research on the physical and chemical aspects of the transport of mass of a fluid phase, the mass of a component of a phase, momentum and energy, in single and multiphase flow in the porous medium domain. 
 
 ## 5) Multi-modal data-based ML for cancer survival
 
@@ -51,6 +54,8 @@ Accurate modelling of the impact of patient-specific features and cancer treatme
 I show that combining multi-modal data features enhances model predictive accuracy, up to AUC 0.82 on unseen test data. Results depict differential accuracy measured by a time-integrated Area Under the Curve (AUC), weighted Concordance Index and Brier index. The predictive accuracy improved stepwise by adding additional relevant data types. 
 
 This model is part of the Integrated ML Predictor of Clinical Trials and answers questions like "What is the recommended treatment for a 52-year-old patient with stage 3 breast cancer, ER+ve, HER2-ve, genetic information e.g FGFR2 copy number gain?"
+
+I presented it orally at the [AACR conference](https://aacrjournals.org/cancerres/article/83/7_Supplement/5696/724638/Abstract-5696-A-prognostic-machine-learning-model) in 2023, the poster is available to download [here](https://concr.co/ASSETS/files/AACR-OS-Breast-Cancer.pdf). 
 
 
 ## 6) ML to predict tissue of origin from mutation data
