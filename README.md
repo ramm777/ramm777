@@ -19,6 +19,8 @@ I get the following distribution of GREEN scores evaluated on the per report sam
 
 <p align="center"> <img src="green_scores.png" alt="Data_fusion" width="500"> </p>
 
+This is an ongoing project. 
+
 ## Integrated ML Predictor of Clinical Trials for Drug Discovery
 We have developed a method that employs Bayesian statistics to accurately forecast the outcomes of clinical trials in the course of novel drug development. The development of an oncology drug currently incurs a cost exceeding £4 billion, given the high failure rate of approximately 95%. Our proposed Digital Twin can simulate a clinical trial and predict novel drug outcomes, thereby improving and mitigating risks in the clinical development of oncology therapeutics. 
 - It uses multi-modal data: genetics (like RNAseq), clinical, image data and chemical compounds data
@@ -44,7 +46,6 @@ We employed a U-Net architecture for semantic segmentation, training the model o
 
 We presented it at the [AACR conference](https://aacrjournals.org/cancerres/article/83/7_Supplement/5424/719634) in 2023, the poster is available to download [here](https://concr.co/news/he-tnbc). 
 
-This is an ongoing project. 
 
 ## Hybrid “Deep Learning + Physics” Computer Vision Model
 
