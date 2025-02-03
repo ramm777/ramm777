@@ -1,4 +1,4 @@
- # Portfolio - AI/ML/Computer Vision 
+ # ----------------- Portfolio in AI/ML/Computer Vision -----------------
 
 Hello, guys! I'm a Scientist in Machine Learning and Computational Science. Over the past 5 years, I've specialized in creating machine learning products for the biotechnology and energy industries. I love the intersection between science and real-world problems. I typically work on private repositories, but here are a few standout projects we've published. Email: 77777aidan@gmail.com
 
