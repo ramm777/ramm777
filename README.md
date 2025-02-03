@@ -2,7 +2,24 @@
 
 Hello, guys! I'm a Scientist in Machine Learning and Computational Science. Over the past 5 years, I've specialized in creating machine learning products for the biotechnology and energy industries. I love the intersection between science and real-world problems. I typically work on private repositories, but here are a few standout projects we've published. Email: 77777aidan@gmail.com
 
-## 1) Integrated ML Predictor of Clinical Trials for Drug Discovery
+## Transformers Using Multi-Modal Image and Text Data to Predict Radiology Reports for X-ray Images
+
+I trained (fine-tuned) a multi-modal LLM model to predict the findings on X-ray images to help radiologists in their day-to-day work. 
+The present global shortage of radiologists limits access to specialist care and imposes heavy workloads on radiologists, leading to unwanted delays and errors in clinical decisions.
+This model can automate X-ray report generation, enhance diagnostic accuracy, and facilitate clinicians in providing timely and effective patient care.
+
+Unfortunately, generating radiology reports remains an unsolved challenge. Here, I present an approach to tackle this challenge and showcase the use of Vision-Language LLM to predict radiology reports. The model inputs multi-modal image and text data and provides an X-ray report. I use the Llama 3.2-Vision and Qwen2-VL models and fine-tune them on the 2900+ chest X-ray images from the public [IU X-Ray dataset](https://paperswithcode.com/dataset/iu-x-ray). 
+
+<p align="center"> <img src="data_outputs/VLM_schematics.png" alt="Data_fusion" width="700"> </p>
+
+For the model performance evaluation of the clinical quality of artificial intelligence (AI)-generated reports, I use the GREEN (Generative Radiology Report Evaluation and Error Notation) metric. 
+It utilizes language models to identify and explain clinically significant errors in radiology reports. 
+Other evaluation metrics can also be used, but they either fail to consider factual correctness, such as BLEU and ROUGE or have limited interpretability, like F1CheXpert and F1RadGraph ([Ostmeier et al., 2024](https://stanford-aimi.github.io/green.html)).
+I get the following distribution of GREEN scores evaluated on the per report sample image: 
+
+<p align="center"> <img src="data_outputs/green_scores.png" alt="Data_fusion" width="500"> </p>
+
+## Integrated ML Predictor of Clinical Trials for Drug Discovery
 We have developed a method that employs Bayesian statistics to accurately forecast the outcomes of clinical trials in the course of novel drug development. The development of an oncology drug currently incurs a cost exceeding £4 billion, given the high failure rate of approximately 95%. Our proposed Digital Twin can simulate a clinical trial and predict novel drug outcomes, thereby improving and mitigating risks in the clinical development of oncology therapeutics. 
 - It uses multi-modal data: genetics (like RNAseq), clinical, image data and chemical compounds data
 - We integrate XGBoost, Gaussian Process and Survival Modelling into one model
@@ -16,7 +33,7 @@ We validate our model by comparing its outputs against the actual historical cli
 
 I have an older preprint on the [MedRxiv](https://www.medrxiv.org/content/10.1101/2024.01.17.24301444v1), the newer and significantly better is being reviewed. Let me know if you'd like to receive it.
 
-## 2) Computer Vision ML to Identify Cell Types on the Medical Images 
+## Computer Vision ML to Identify Cell Types on the Medical Images 
 We developed a deep-learning model to identify types of cells (tumour cells, lymphocytes, and fibroblasts) from medical images. The model was utilized to investigate the impact of image features on the modelling of clinical trials for drug discovery and predicting treatment outcomes. Additionally, it could assist pathologists, who spend a considerable amount of time on diagnostics, by improving their productivity.
 
 The model was trained with annotated images from a breast cancer dataset and validated using standard machine learning validations and by another expert pathologist. The results demonstrated that the model could accurately identify the cells, especially tumour-infiltrating lymphocytes (TILs), which it identified even more accurately than a pathologist.
@@ -29,7 +46,7 @@ We presented it at the [AACR conference](https://aacrjournals.org/cancerres/arti
 
 
 
-## 3) Hybrid “Deep Learning + Physics” Computer Vision Model
+## Hybrid “Deep Learning + Physics” Computer Vision Model
 
 Here, I designed and created a deep learning model that combines computer vision deep learning and physics for the physics-based simulation. Solving multi-physics problems usually requires expensive, high-performance computers and complex code. The model helps and explores how machine learning can reduce computation time in these kinds of problems. It uses a deep learning model, specifically a convolutional neural network, to predict rough fracture permeability from digital images during the fracture deformation process. Even in extrapolation tests with different fracture roughness, the model maintained high accuracy with about 8% MAPE. I show that my method is able to speed up the numerical simulation up to 20 times faster than the conventional fully physics-based methods.
 
@@ -37,7 +54,7 @@ Here, I designed and created a deep learning model that combines computer vision
 
 I published it in the [Engineering Applications of Artificial Intelligence](https://www.sciencedirect.com/science/article/abs/pii/S0952197623007467) journal in 2023. 
 
-## 4) Physics-based Computer Vision Method for Energy, Oil&Gas, Climate Change and Earthquakes projects
+## Physics-based Computer Vision Method for Energy, Oil&Gas, Climate Change and Earthquakes projects
 
 I created a research software tool (Physics-based Computer Vision Method) and methodology that takes digital images as inputs, performs predictive modelling, and identifies key performance indicators (KPIs) for energy, oil&gas and climate change projects. The model focuses on understanding and simulating how stress affects the permeability of rough fracture surfaces during the surface deformation process, using a combination of numerical contact mechanics, numerical modelling and the Stokes equation. This approach allows for the simulation of mechanical deformation and fluid flow in natural fractures with complex geometries. The software accurately predicts the stress-permeability relationship, helping to provide valuable insights for hydro-mechanical studies of geological formations. This tool significantly reduces computation time, providing quick and accurate results that can inform better decision-making in energy, oil&gas and climate change projects, such as GCCS. 
 
@@ -45,7 +62,7 @@ I created a research software tool (Physics-based Computer Vision Method) and me
 
 I published it in the [Transport in Porous Media](https://link.springer.com/article/10.1007/s11242-021-01719-7), which focuses on the research on the physical and chemical aspects of the transport of mass of a fluid phase, the mass of a component of a phase, momentum and energy, in single and multiphase flow in the porous medium domain. 
 
-## 5) Multi-modal data-based ML for cancer survival
+## Multi-modal data-based ML for cancer survival
 
 Accurate modelling of the impact of patient-specific features and cancer treatments on survival allows the assignment of targeted therapy. Delivering personalized medicine to select the “best” cancer treatment for the individual is challenging. There is a need to build a multi-source data-driven model for the survival analysis of breast cancer. I developed an ML model that integrates multi-modal data - genetic, hormone, clinical, and therapy data - to predict survival for breast cancer patients. 
 
@@ -58,7 +75,7 @@ This model is part of the Integrated ML Predictor of Clinical Trials and answers
 I presented it orally at the [AACR conference](https://aacrjournals.org/cancerres/article/83/7_Supplement/5696/724638/Abstract-5696-A-prognostic-machine-learning-model) in 2023, the poster is available to download [here](https://concr.co/ASSETS/files/AACR-OS-Breast-Cancer.pdf). 
 
 
-## 6) ML to predict tissue of origin from mutation data
+## ML to predict tissue of origin from mutation data
 
 Cancer of Unknown Primary (CUP) is a clinical condition with a poor prognosis. Patients present with metastatic tumours for which the primary tissue of origin cannot be easily determined. The current standard of care relies on identifying the primary tissue of origin using radiological investigations, tumour marker assessment, and biopsy. For one-third of CUP patients, the origin of the primary tumour cannot be found, making it difficult to choose the best chemotherapy regime and preventing access to targeted and immune therapies. 
 
@@ -68,16 +85,4 @@ We train a Machine Learning classifier to predict the tissue type of a solid tum
 
 We presented this study at the [AACR conference](https://aacrjournals.org/cancerres/article/83/7_Supplement/5429/719629/Abstract-5429-Using-machine-learning-to-predict).
 
-
---------
-
-<!---
-![Multi-modal_ML](Multi-modal_ML.png)
-![Physics_based_Computer_Vision](Physics_based_Computer_Vision.png)
-![Predictor_Clinical_Trials](Predictor_Clinical_Trials.png)
-
-ramm777/ramm777 is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-You can click the Preview link to take a look at your changes.
-🌱 I’m currently learning more DS to become an expert
---->
 
