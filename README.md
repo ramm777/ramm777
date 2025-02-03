@@ -44,7 +44,7 @@ We employed a U-Net architecture for semantic segmentation, training the model o
 
 We presented it at the [AACR conference](https://aacrjournals.org/cancerres/article/83/7_Supplement/5424/719634) in 2023, the poster is available to download [here](https://concr.co/news/he-tnbc). 
 
-
+This is an ongoing project. 
 
 ## Hybrid “Deep Learning + Physics” Computer Vision Model
 
