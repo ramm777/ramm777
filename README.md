@@ -49,7 +49,7 @@ We validate our model by comparing its outputs against the actual historical cli
 
 <p align="center"> <img src="Predictor_Clinical_Trials.png" alt="Predictor_Clinical_Trials" width="700"> </p>
 
-I have an older preprint on the [MedRxiv](https://www.medrxiv.org/content/10.1101/2024.01.17.24301444v1), the newer and significantly better is being reviewed. Let me know if you'd like to receive it.
+The paper submitted to NEJM AI. I have an older preprint on the [MedRxiv](https://www.medrxiv.org/content/10.1101/2024.01.17.24301444v1), the newer and significantly better is being reviewed. Let me know if you'd like to receive the newer version.  
 
 ## Computer Vision ML to Identify Cell Types on the Medical Images 
 We developed a deep-learning model to identify types of cells (tumour cells, lymphocytes, and fibroblasts) from medical images. The model was utilized to investigate the impact of image features on the modelling of clinical trials for drug discovery and predicting treatment outcomes. Additionally, it could assist pathologists, who spend a considerable amount of time on diagnostics, by improving their productivity.
