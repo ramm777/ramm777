@@ -4,7 +4,7 @@
 
 Hello, guys! I'm a Scientist in Machine Learning and Computational Science. Over the past 5 years, I've specialized in creating machine-learning products for the biotech and oil and gas industries. I love the intersection between science and real-world problems. I typically work on private repositories, but here are a few standout projects we've published. Email: 77777aidan@gmail.com
 
-## Transformers Using Multi-Modal Image and Text Data to Predict Radiology Reports for X-ray Images
+## Multi-Modal Vision-Language Transformers for Automated Radiology Report Generation from X-ray Images
 
 I trained (fine-tuned) a multi-modal LLM model to predict the findings on X-ray images to help radiologists in their day-to-day work. 
 The present global shortage of radiologists limits access to specialist care and imposes heavy workloads on radiologists, leading to unwanted delays and errors in clinical decisions.
