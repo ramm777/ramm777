@@ -100,6 +100,6 @@ Cancer of Unknown Primary (CUP) is a clinical condition with a poor prognosis. P
 
 We train a Machine Learning classifier to predict the tissue type of a solid tumour using only whole exome somatic mutation information.
 
-We presented this study at the [AACR conference](https://aacrjournals.org/cancerres/article/83/7_Supplement/5429/719629/Abstract-5429-Using-machine-learning-to-predict).
+We presented this study at the [AACR conference](https://aacrjournals.org/cancerres/article/83/7_Supplement/5429/719629/Abstract-5429-Using-machine-learning-to-predict), where I am the 3rd author. 
 
 
