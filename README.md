@@ -21,7 +21,11 @@ I get the following distribution of GREEN scores evaluated on the per report sam
 
 <p align="center"> <img src="green_scores.png" alt="Data_fusion" width="500"> </p>
 
-This is an ongoing project. 
+GREEN uses advanced language models to:
+	
+ -	Compare a machine-generated radiology report to a trusted, expert-written reference report.
+ -	Spot clinically important mistakes-for example, if the AI says “no pneumonia” when there actually is pneumonia.
+ -	Explain the errors in plain language, so users know exactly what went wrong and why.
 
 ## AI agent for job search using LangChain
 
