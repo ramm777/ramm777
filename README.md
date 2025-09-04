@@ -9,6 +9,7 @@ Here, I create AI Doctor Agent (chatbot) that uses only scientifically verified 
 
 Step 1: Scraping website for information about illnesses - This part starts by scraping the British official NHS website for information about illnesses, which lists various medical conditions and their links. Finally, all the processed data - the text, illness names, and embeddings - gets stored in a PostgreSQL database with special vector search capabilities.
 
+<p align="center"> <img src="AI_Agent_Doctor_with_RAG.png" alt="AI_Agent_Doctor_with_RAG" width="500"> </p>
 
 Step 2: AI Agent connected to RAG (PostgreSQL database) - This second part creates a chat interface where users can ask medical questions. When someone sends a message, an AI agent powered by OpenAI receives it and uses a technique called RAG (Retrieval Augmented Generation). The agent searches through the database of NHS medical information stored earlier, finding the most relevant content about the user's question using vector similarity search. It also maintains conversation history in the same PostgreSQL database, so it can remember what was discussed earlier in the chat. The AI then combines the retrieved medical information with its general knowledge to provide accurate, contextual answers about health conditions, essentially creating a knowledgeable medical assistant that bases its responses on official NHS information rather than just general AI training data.
 
