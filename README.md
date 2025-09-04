@@ -14,6 +14,7 @@ Step 1: Scraping website for information about illnesses - This part starts by s
 
 Step 2: AI Agent connected to RAG (PostgreSQL database) - This second part creates a chat interface where users can ask medical questions. When someone sends a message, an AI agent powered by OpenAI receives it and uses a technique called RAG (Retrieval Augmented Generation). The agent searches through the database of NHS medical information stored earlier, finding the most relevant content about the user's question using vector similarity search. It also maintains conversation history in the same PostgreSQL database, so it can remember what was discussed earlier in the chat. The AI then combines the retrieved medical information with its general knowledge to provide accurate, contextual answers about health conditions, essentially creating a knowledgeable medical assistant that bases its responses on official NHS information rather than just general AI training data.
 
+**Technologies:** n8n, Web Scraping, PostgreSQL, OpenAI
 
 ## Project 2: Fill in
 
@@ -39,6 +40,8 @@ GREEN uses advanced language models to:
  -	Compare a machine-generated radiology report to a trusted, expert-written reference report.
  -	Spot clinically important mistakes-for example, if the AI says “no pneumonia” when there actually is pneumonia.
  -	Explain the errors in plain language, so users know exactly what went wrong and why.
+
+**Technologies:** LLMs, VLMs, Torch, Unsloth 
 
 ## Project 4: AI agent for job search using LangChain
 
