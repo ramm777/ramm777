@@ -2,7 +2,7 @@
 
 ---
 
-Hello, guys! I'm a Scientist in Machine Learning and Computational Science. Over the past 5 years, I've specialized in creating machine-learning products for the biotech and oil and gas industries. I love the intersection between science and real-world problems. I typically work on private repositories, but here are a few standout projects we've published. Email: 77777aidan@gmail.com
+Hello, guys! I'm a Scientist and Engineer in Machine Learning and Computational Science. Please see my portfolio, I typically work on private repositories, but here are a few standout projects we've published here and in journals. Email: 77777aidan@gmail.com
 
 ## Project 1: AI Agent Doctor with RAG based on Verified Scientific Data using n8n.   
 Here, I create AI Doctor Agent (chatbot) that uses only scientifically verified data from British Healthcare (NHS) website using n8n for rapid prototyping of AI agents. It is providing 24/7 access to reliable medical information for questions about symptoms and conditions, helping healthcare professionals, patients and students quickly reference medical guidelines and protocols. 
