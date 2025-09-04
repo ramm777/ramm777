@@ -15,7 +15,7 @@ Step 1: Scraping website for information about illnesses - This part starts by s
 Step 2: AI Agent connected to RAG (PostgreSQL database) - This second part creates a chat interface where users can ask medical questions. When someone sends a message, an AI agent powered by OpenAI receives it and uses a technique called RAG (Retrieval Augmented Generation). The agent searches through the database of NHS medical information stored earlier, finding the most relevant content about the user's question using vector similarity search. It also maintains conversation history in the same PostgreSQL database, so it can remember what was discussed earlier in the chat. The AI then combines the retrieved medical information with its general knowledge to provide accurate, contextual answers about health conditions, essentially creating a knowledgeable medical assistant that bases its responses on official NHS information rather than just general AI training data.
 
 
-## Project 2: Multi-Modal Vision-Language Transformers for Automated Radiology Report Generation from X-ray Images
+## Project 2: Fill in
 
 ## Project 3: Multi-Modal Vision-Language Transformers for Automated Radiology Report Generation from X-ray Images
 
@@ -40,7 +40,7 @@ GREEN uses advanced language models to:
  -	Spot clinically important mistakes-for example, if the AI says “no pneumonia” when there actually is pneumonia.
  -	Explain the errors in plain language, so users know exactly what went wrong and why.
 
-## AI agent for job search using LangChain
+## Project 4: AI agent for job search using LangChain
 
 An AI agent is a specialized software solution built on top of large language models (LLMs) and fine-tuned to automate specific, critical tasks across various industries. Examples include: 
 - AI tax accountant that manages tax preparation and advisory services,
@@ -54,7 +54,7 @@ I have implemented a ReAct agent (reason and act), which offers a more structure
 
 <p align="center"> <img src="ai_agent_jobsearch.png" alt="ai_agent_jobsearch" width="500"> </p>
 
-## Integrated ML Predictor of Clinical Trials for Drug Discovery
+## Project 5: Integrated ML Predictor of Clinical Trials for Drug Discovery
 We have developed a method that employs Bayesian statistics to accurately forecast the outcomes of clinical trials in the course of novel drug development. The development of an oncology drug currently incurs a cost exceeding £4 billion, given the high failure rate of approximately 95%. Our proposed Digital Twin can simulate a clinical trial and predict novel drug outcomes, thereby improving and mitigating risks in the clinical development of oncology therapeutics. 
 - It uses multi-modal data: genetics (like RNAseq), clinical, image data and chemical compounds data
 - We integrate XGBoost, Gaussian Process and Survival Modelling into one model
@@ -68,7 +68,7 @@ We validate our model by comparing its outputs against the actual historical cli
 
 The paper submitted to NEJM AI. I have an older preprint on the [MedRxiv](https://www.medrxiv.org/content/10.1101/2024.01.17.24301444v1), the newer and significantly better is being reviewed. Let me know if you'd like to receive the newer version.  
 
-## Computer Vision ML to Identify Cell Types on the Medical Images 
+## Project 6: Computer Vision ML to Identify Cell Types on the Medical Images 
 We developed a deep-learning model to identify types of cells (tumour cells, lymphocytes, and fibroblasts) from medical images. The model was utilized to investigate the impact of image features on the modelling of clinical trials for drug discovery and predicting treatment outcomes. Additionally, it could assist pathologists, who spend a considerable amount of time on diagnostics, by improving their productivity.
 
 The model was trained with annotated images from a breast cancer dataset and validated using standard machine learning validations and by another expert pathologist. The results demonstrated that the model could accurately identify the cells, especially tumour-infiltrating lymphocytes (TILs), which it identified even more accurately than a pathologist.
@@ -80,7 +80,7 @@ We employed a U-Net architecture for semantic segmentation, training the model o
 We presented it at the [AACR conference](https://aacrjournals.org/cancerres/article/83/7_Supplement/5424/719634) in 2023, the poster is available to download [here](https://concr.co/news/he-tnbc). 
 
 
-## Hybrid “Deep Learning + Physics” Computer Vision Model
+## Project 7: Hybrid “Deep Learning + Physics” Computer Vision Model
 
 Here, I designed and created a deep learning model that combines computer vision deep learning and physics for the physics-based simulation. Solving multi-physics problems usually requires expensive, high-performance computers and complex code. The model helps and explores how machine learning can reduce computation time in these kinds of problems. It uses a deep learning model, specifically a convolutional neural network, to predict rough fracture permeability from digital images during the fracture deformation process. Even in extrapolation tests with different fracture roughness, the model maintained high accuracy with about 8% MAPE. I show that my method is able to speed up the numerical simulation up to 20 times faster than the conventional fully physics-based methods.
 
@@ -88,7 +88,7 @@ Here, I designed and created a deep learning model that combines computer vision
 
 I published it in the [Engineering Applications of Artificial Intelligence](https://www.sciencedirect.com/science/article/abs/pii/S0952197623007467) journal in 2023. 
 
-## Physics-based Computer Vision Method for Energy, Oil&Gas, Climate Change and Earthquakes projects
+## Project 8: Physics-based Computer Vision Method for Energy, Oil&Gas, Climate Change and Earthquakes projects
 
 I created a research software tool (Physics-based Computer Vision Method) and methodology that takes digital images as inputs, performs predictive modelling, and identifies key performance indicators (KPIs) for energy, oil&gas and climate change projects. The model focuses on understanding and simulating how stress affects the permeability of rough fracture surfaces during the surface deformation process, using a combination of numerical contact mechanics, numerical modelling and the Stokes equation. This approach allows for the simulation of mechanical deformation and fluid flow in natural fractures with complex geometries. The software accurately predicts the stress-permeability relationship, helping to provide valuable insights for hydro-mechanical studies of geological formations. This tool significantly reduces computation time, providing quick and accurate results that can inform better decision-making in energy, oil&gas and climate change projects, such as GCCS. 
 
@@ -96,7 +96,7 @@ I created a research software tool (Physics-based Computer Vision Method) and me
 
 I published it in the [Transport in Porous Media](https://link.springer.com/article/10.1007/s11242-021-01719-7), which focuses on the research on the physical and chemical aspects of the transport of mass of a fluid phase, the mass of a component of a phase, momentum and energy, in single and multiphase flow in the porous medium domain. 
 
-## Multi-modal data-based ML for cancer survival
+## Project 9: Multi-modal data-based ML for cancer survival
 
 Accurate modelling of the impact of patient-specific features and cancer treatments on survival allows the assignment of targeted therapy. Delivering personalized medicine to select the “best” cancer treatment for the individual is challenging. There is a need to build a multi-source data-driven model for the survival analysis of breast cancer. I developed an ML model that integrates multi-modal data - genetic, hormone, clinical, and therapy data - to predict survival for breast cancer patients. 
 
@@ -109,7 +109,7 @@ This model is part of the Integrated ML Predictor of Clinical Trials and answers
 I presented it orally at the [AACR conference](https://aacrjournals.org/cancerres/article/83/7_Supplement/5696/724638/Abstract-5696-A-prognostic-machine-learning-model) in 2023, the poster is available to download [here](https://concr.co/ASSETS/files/AACR-OS-Breast-Cancer.pdf). 
 
 
-## ML to predict tissue of origin from mutation data
+## Project 10: ML to predict tissue of origin from mutation data
 
 Cancer of Unknown Primary (CUP) is a clinical condition with a poor prognosis. Patients present with metastatic tumours for which the primary tissue of origin cannot be easily determined. The current standard of care relies on identifying the primary tissue of origin using radiological investigations, tumour marker assessment, and biopsy. For one-third of CUP patients, the origin of the primary tumour cannot be found, making it difficult to choose the best chemotherapy regime and preventing access to targeted and immune therapies. 
 
