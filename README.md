@@ -4,7 +4,18 @@
 
 Hello, guys! I'm a Scientist in Machine Learning and Computational Science. Over the past 5 years, I've specialized in creating machine-learning products for the biotech and oil and gas industries. I love the intersection between science and real-world problems. I typically work on private repositories, but here are a few standout projects we've published. Email: 77777aidan@gmail.com
 
-## Multi-Modal Vision-Language Transformers for Automated Radiology Report Generation from X-ray Images
+## Project 1: AI Agent Doctor with RAG based on Verified Scientific Data using n8n.   
+Here, I create AI Doctor Agent (chatbot) that uses only scientifically verified data from British Healthcare (NHS) website using n8n for rapid prototyping of AI agents. It is providing 24/7 access to reliable medical information for questions about symptoms and conditions, helping healthcare professionals, patients and students quickly reference medical guidelines and protocols. 
+
+Step 1: Scraping website for information about illnesses - This part starts by scraping the British official NHS website for information about illnesses, which lists various medical conditions and their links. Finally, all the processed data - the text, illness names, and embeddings - gets stored in a PostgreSQL database with special vector search capabilities.
+
+
+Step 2: AI Agent connected to RAG (PostgreSQL database) - This second part creates a chat interface where users can ask medical questions. When someone sends a message, an AI agent powered by OpenAI receives it and uses a technique called RAG (Retrieval Augmented Generation). The agent searches through the database of NHS medical information stored earlier, finding the most relevant content about the user's question using vector similarity search. It also maintains conversation history in the same PostgreSQL database, so it can remember what was discussed earlier in the chat. The AI then combines the retrieved medical information with its general knowledge to provide accurate, contextual answers about health conditions, essentially creating a knowledgeable medical assistant that bases its responses on official NHS information rather than just general AI training data.
+
+
+## Project 2: Multi-Modal Vision-Language Transformers for Automated Radiology Report Generation from X-ray Images
+
+## Project 3: Multi-Modal Vision-Language Transformers for Automated Radiology Report Generation from X-ray Images
 
 I trained (fine-tuned) a multi-modal LLM model to predict the findings on X-ray images to help radiologists in their day-to-day work. 
 The present global shortage of radiologists limits access to specialist care and imposes heavy workloads on radiologists, leading to unwanted delays and errors in clinical decisions.
