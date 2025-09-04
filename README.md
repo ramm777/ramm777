@@ -2,7 +2,7 @@
 
 ---
 
-Hello, guys! I'm a Scientist and Engineer in Machine Learning and Computational Science. Feel free to fire off an email to: 77777aidan@gmail.com
+Hello, guys! I'm a Scientist and Engineer in Machine Learning and Computational Science. Fire off an email to: 77777aidan@gmail.com
 
 
 ## Project 1: AI Agent Doctor with RAG based on Verified Scientific Data using n8n.   
