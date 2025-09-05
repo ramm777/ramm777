@@ -42,7 +42,7 @@ GREEN uses advanced language models to:
 
 **Technologies:** LLMs, VLMs, Torch, Unsloth 
 
-**Code:**  [https://github.com/ramm777/transformers_xray_report](https://github.com/ramm777/transformers_xray_report)
+**Code:**  [https://github.com/ramm777/AI_agent](https://github.com/ramm777/AI_agent)
 
 
 
@@ -59,6 +59,8 @@ These agents enhance efficiency by focusing on niche areas, and providing accura
 I have implemented a ReAct agent (reason and act), which offers a more structured approach to building AI systems. The agent is provided with specific instructions, such as acting as a recruiter or an assistant, and generates responses based on user queries. By interacting with real-world data sources, it ensures dynamic and real-time functionality. The results demonstrate how the agent selects the appropriate tool—such as Wikipedia for answering company-related queries or Google Jobs for job searches—based on the prompt given to the LLM chat model.
 
 <p align="center"> <img src="ai_agent_jobsearch.png" alt="ai_agent_jobsearch" width="500"> </p>
+
+**Code:**  [https://github.com/ramm777/AI_agent](https://github.com/ramm777/AI_agent)
 
 ## Project 5: Integrated ML Predictor of Clinical Trials for Drug Discovery
 We have developed a method that employs Bayesian statistics to accurately forecast the outcomes of clinical trials in the course of novel drug development. The development of an oncology drug currently incurs a cost exceeding £4 billion, given the high failure rate of approximately 95%. Our proposed Digital Twin can simulate a clinical trial and predict novel drug outcomes, thereby improving and mitigating risks in the clinical development of oncology therapeutics. 
