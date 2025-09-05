@@ -16,6 +16,8 @@ Step 2: AI Agent connected to RAG (PostgreSQL database) - This second part creat
 
 **Technologies:** n8n, Web Scraping, PostgreSQL, OpenAI
 
+**Code:**  [https://github.com/ramm777/aidan_doctor_agentic_n8n](https://github.com/ramm777/aidan_doctor_agentic_n8n)
+
 
 ## Project 3: Multi-Modal Vision-Language Transformers for Automated Radiology Report Generation from X-ray Images
 
