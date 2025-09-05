@@ -42,6 +42,10 @@ GREEN uses advanced language models to:
 
 **Technologies:** LLMs, VLMs, Torch, Unsloth 
 
+**Code:**  [https://github.com/ramm777/transformers_xray_report](https://github.com/ramm777/transformers_xray_report)
+
+
+
 ## Project 4: AI agent for job search using LangChain
 
 An AI agent is a specialized software solution built on top of large language models (LLMs) and fine-tuned to automate specific, critical tasks across various industries. Examples include: 
