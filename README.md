@@ -44,7 +44,7 @@ GREEN uses advanced language models to:
 
 **Technologies:** LLMs, VLMs, Torch, Unsloth 
 
-**Code:**  [https://github.com/ramm777/AI_agent](https://github.com/ramm777/AI_agent)
+**Code:**  [https://github.com/ramm777/transformers_xray_report](https://github.com/ramm777/transformers_xray_report)
 
 
 
