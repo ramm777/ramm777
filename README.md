@@ -1,11 +1,11 @@
- #  Portfolio in AI/ML/Computer Vision 
+ #  Portfolio in AI/ML/Computer Vision and Agentic
 
 ---
 
 Hello, guys! I'm a Scientist and Engineer in Machine Learning and Computational Science. Fire off an email to: 77777aidan@gmail.com
 
 
-## Project 1 (AI Agents): AI Agent Doctor with RAG based on Verified Scientific Data using n8n.   
+## Project 1 - AI Agent Doctor with RAG based on Verified Scientific Data using n8n.   
 Here, I create AI Doctor Agent (chatbot) that uses only scientifically verified data from British Healthcare (NHS) website using n8n for rapid prototyping of AI agents. It is providing 24/7 access to reliable medical information for questions about symptoms and conditions, helping healthcare professionals, patients and students quickly reference medical guidelines and protocols. 
 
 Step 1: Scraping website for information about illnesses - This part starts by scraping the British official NHS website for information about illnesses, which lists various medical conditions and their links. Finally, all the processed data - the text, illness names, and embeddings - gets stored in a PostgreSQL database with special vector search capabilities.
@@ -18,9 +18,11 @@ Step 2: AI Agent connected to RAG (PostgreSQL database) - This second part creat
 
 **Code:**  [https://github.com/ramm777/aidan_doctor_agentic_n8n](https://github.com/ramm777/aidan_doctor_agentic_n8n)
 
-## Project 2 (AI Agents): Connect MCP Client to MCP Server and Tools using n8n, Docker, WSL on Local PC 
+<br><br><br>
 
-<img src="images/n8n_scheme.png" alt="n8n scheme" width="850"/>
+## Project 2 - Connect MCP Client to MCP Server and Tools using n8n, Docker, WSL on Local PC 
+
+<img src="n8n_scheme.png" alt="n8n scheme" width="850"/>
 
 The Model Context Protocol (MCP) is a powerful open standard that allows AI systems, especially large language models (LLMs), to securely interact with external tools, services, and data sources. Top 5 Key Points of Using MCP Servers & Clients: 
 	
@@ -72,8 +74,9 @@ To handle SSL and domain routing cleanly, use **Traefik** as a reverse proxy in 
 
 **Code:**  [https://github.com/ramm777/mcp_server_and_client_with_custom_functions](https://github.com/ramm777/mcp_server_and_client_with_custom_functions)
 
+<br><br><br>
 
-## Project 3: Multi-Modal Vision-Language Transformers for Automated Radiology Report Generation from X-ray Images
+## Project 3 - Multi-Modal Vision-Language Transformers for Automated Radiology Report Generation from X-ray Images
 
 I trained (fine-tuned) a multi-modal LLM model to predict the findings on X-ray images to help radiologists in their day-to-day work. 
 The present global shortage of radiologists limits access to specialist care and imposes heavy workloads on radiologists, leading to unwanted delays and errors in clinical decisions.
@@ -100,9 +103,9 @@ GREEN uses advanced language models to:
 
 **Code:**  [https://github.com/ramm777/transformers_xray_report](https://github.com/ramm777/transformers_xray_report)
 
+<br><br><br>
 
-
-## Project 4: AI agent for job search using LangChain
+## Project 4 - AI agent for job search using LangChain
 
 An AI agent is a specialized software solution built on top of large language models (LLMs) and fine-tuned to automate specific, critical tasks across various industries. Examples include: 
 - AI tax accountant that manages tax preparation and advisory services,
@@ -118,7 +121,10 @@ I have implemented a ReAct agent (reason and act), which offers a more structure
 
 **Code:**  [https://github.com/ramm777/AI_agent](https://github.com/ramm777/AI_agent)
 
-## Project 5: Integrated ML Predictor of Clinical Trials for Drug Discovery
+<br><br><br>
+
+
+## Project 5 - Integrated ML Predictor of Clinical Trials for Drug Discovery
 We have developed a method that employs Bayesian statistics to accurately forecast the outcomes of clinical trials in the course of novel drug development. The development of an oncology drug currently incurs a cost exceeding £4 billion, given the high failure rate of approximately 95%. Our proposed Digital Twin can simulate a clinical trial and predict novel drug outcomes, thereby improving and mitigating risks in the clinical development of oncology therapeutics. 
 - It uses multi-modal data: genetics (like RNAseq), clinical, image data and chemical compounds data
 - We integrate XGBoost, Gaussian Process and Survival Modelling into one model
@@ -132,7 +138,9 @@ We validate our model by comparing its outputs against the actual historical cli
 
 **Paper:** The paper submitted to NEJM AI. An older preprint is on the [MedRxiv](https://www.medrxiv.org/content/10.1101/2024.01.17.24301444v1), the newer is much better, let me know if you'd like to receive it.  
 
-## Project 6: Computer Vision ML to Identify Cell Types on the Medical Images 
+<br><br><br>
+
+## Project 6 - Computer Vision ML to Identify Cell Types on the Medical Images 
 We developed a deep-learning model to identify types of cells (tumour cells, lymphocytes, and fibroblasts) from medical images. The model was utilized to investigate the impact of image features on the modelling of clinical trials for drug discovery and predicting treatment outcomes. Additionally, it could assist pathologists, who spend a considerable amount of time on diagnostics, by improving their productivity.
 
 The model was trained with annotated images from a breast cancer dataset and validated using standard machine learning validations and by another expert pathologist. The results demonstrated that the model could accurately identify the cells, especially tumour-infiltrating lymphocytes (TILs), which it identified even more accurately than a pathologist.
@@ -143,24 +151,7 @@ We employed a U-Net architecture for semantic segmentation, training the model o
 
 **Paper:**  We presented it at the [AACR conference](https://aacrjournals.org/cancerres/article/83/7_Supplement/5424/719634) in 2023, the poster is available to download [here](https://concr.co/news/he-tnbc). 
 
-
-## Project 7: Hybrid “Deep Learning + Physics” Computer Vision Model
-
-Here, I designed and created a deep learning model that combines computer vision deep learning and physics for the physics-based simulation. Solving multi-physics problems usually requires expensive, high-performance computers and complex code. The model helps and explores how machine learning can reduce computation time in these kinds of problems. It uses a deep learning model, specifically a convolutional neural network, to predict rough fracture permeability from digital images during the fracture deformation process. Even in extrapolation tests with different fracture roughness, the model maintained high accuracy with about 8% MAPE. I show that my method is able to speed up the numerical simulation up to 20 times faster than the conventional fully physics-based methods.
-
-<p align="center"> <img src="Deep_Learning_Physics.png" alt="Deep_Learning_Physics" width="800"> </p>
-
-**Paper:**  I published it in the [Engineering Applications of Artificial Intelligence](https://www.sciencedirect.com/science/article/abs/pii/S0952197623007467) journal in 2023. 
-
-## Project 8: Physics-based Computer Vision Method for Energy, Oil&Gas, Climate Change and Earthquakes projects
-
-I created a research software tool (Physics-based Computer Vision Method) and methodology that takes digital images as inputs, performs predictive modelling, and identifies key performance indicators (KPIs) for energy, oil&gas and climate change projects. The model focuses on understanding and simulating how stress affects the permeability of rough fracture surfaces during the surface deformation process, using a combination of numerical contact mechanics, numerical modelling and the Stokes equation. This approach allows for the simulation of mechanical deformation and fluid flow in natural fractures with complex geometries. The software accurately predicts the stress-permeability relationship, helping to provide valuable insights for hydro-mechanical studies of geological formations. This tool significantly reduces computation time, providing quick and accurate results that can inform better decision-making in energy, oil&gas and climate change projects, such as GCCS. 
-
-<p align="center"> <img src="Physics_based_Computer_Vision.png" alt="Physics_based_Computer_Vision" width="700"> </p>
-
-**Paper:**  I published it in the [Transport in Porous Media](https://link.springer.com/article/10.1007/s11242-021-01719-7), which focuses on the research on the physical and chemical aspects of the transport of mass of a fluid phase, the mass of a component of a phase, momentum and energy, in single and multiphase flow in the porous medium domain. 
-
-## Project 9: Multi-modal data-based ML for cancer survival
+## Project 7 - Multi-modal data-based ML for cancer survival
 
 Accurate modelling of the impact of patient-specific features and cancer treatments on survival allows the assignment of targeted therapy. Delivering personalized medicine to select the “best” cancer treatment for the individual is challenging. There is a need to build a multi-source data-driven model for the survival analysis of breast cancer. I developed an ML model that integrates multi-modal data - genetic, hormone, clinical, and therapy data - to predict survival for breast cancer patients. 
 
@@ -172,8 +163,24 @@ This model is part of the Integrated ML Predictor of Clinical Trials and answers
 
 **Paper:** I presented it orally at the [AACR conference](https://aacrjournals.org/cancerres/article/83/7_Supplement/5696/724638/Abstract-5696-A-prognostic-machine-learning-model) in 2023, the poster is available to download [here](https://concr.co/ASSETS/files/AACR-OS-Breast-Cancer.pdf). 
 
+## Project 8 - Hybrid “Deep Learning + Physics” Computer Vision Model
 
-## Project 10: ML to predict tissue of origin from mutation data
+Here, I designed and created a deep learning model that combines computer vision deep learning and physics for the physics-based simulation. Solving multi-physics problems usually requires expensive, high-performance computers and complex code. The model helps and explores how machine learning can reduce computation time in these kinds of problems. It uses a deep learning model, specifically a convolutional neural network, to predict rough fracture permeability from digital images during the fracture deformation process. Even in extrapolation tests with different fracture roughness, the model maintained high accuracy with about 8% MAPE. I show that my method is able to speed up the numerical simulation up to 20 times faster than the conventional fully physics-based methods.
+
+<p align="center"> <img src="Deep_Learning_Physics.png" alt="Deep_Learning_Physics" width="800"> </p>
+
+**Paper:**  I published it in the [Engineering Applications of Artificial Intelligence](https://www.sciencedirect.com/science/article/abs/pii/S0952197623007467) journal in 2023. 
+
+## Project 9 - Physics-based Computer Vision Method for Energy, Oil&Gas, Climate Change and Earthquakes projects
+
+I created a research software tool (Physics-based Computer Vision Method) and methodology that takes digital images as inputs, performs predictive modelling, and identifies key performance indicators (KPIs) for energy, oil&gas and climate change projects. The model focuses on understanding and simulating how stress affects the permeability of rough fracture surfaces during the surface deformation process, using a combination of numerical contact mechanics, numerical modelling and the Stokes equation. This approach allows for the simulation of mechanical deformation and fluid flow in natural fractures with complex geometries. The software accurately predicts the stress-permeability relationship, helping to provide valuable insights for hydro-mechanical studies of geological formations. This tool significantly reduces computation time, providing quick and accurate results that can inform better decision-making in energy, oil&gas and climate change projects, such as GCCS. 
+
+<p align="center"> <img src="Physics_based_Computer_Vision.png" alt="Physics_based_Computer_Vision" width="700"> </p>
+
+**Paper:**  I published it in the [Transport in Porous Media](https://link.springer.com/article/10.1007/s11242-021-01719-7), which focuses on the research on the physical and chemical aspects of the transport of mass of a fluid phase, the mass of a component of a phase, momentum and energy, in single and multiphase flow in the porous medium domain. 
+
+
+## Project 10 - ML to predict tissue of origin from mutation data
 
 Cancer of Unknown Primary (CUP) is a clinical condition with a poor prognosis. Patients present with metastatic tumours for which the primary tissue of origin cannot be easily determined. The current standard of care relies on identifying the primary tissue of origin using radiological investigations, tumour marker assessment, and biopsy. For one-third of CUP patients, the origin of the primary tumour cannot be found, making it difficult to choose the best chemotherapy regime and preventing access to targeted and immune therapies. 
 
