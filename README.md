@@ -151,6 +151,8 @@ We employed a U-Net architecture for semantic segmentation, training the model o
 
 **Paper:**  We presented it at the [AACR conference](https://aacrjournals.org/cancerres/article/83/7_Supplement/5424/719634) in 2023, the poster is available to download [here](https://concr.co/news/he-tnbc). 
 
+<br><br><br>
+
 ## Project 7 - Multi-modal data-based ML for cancer survival
 
 Accurate modelling of the impact of patient-specific features and cancer treatments on survival allows the assignment of targeted therapy. Delivering personalized medicine to select the “best” cancer treatment for the individual is challenging. There is a need to build a multi-source data-driven model for the survival analysis of breast cancer. I developed an ML model that integrates multi-modal data - genetic, hormone, clinical, and therapy data - to predict survival for breast cancer patients. 
@@ -163,6 +165,8 @@ This model is part of the Integrated ML Predictor of Clinical Trials and answers
 
 **Paper:** I presented it orally at the [AACR conference](https://aacrjournals.org/cancerres/article/83/7_Supplement/5696/724638/Abstract-5696-A-prognostic-machine-learning-model) in 2023, the poster is available to download [here](https://concr.co/ASSETS/files/AACR-OS-Breast-Cancer.pdf). 
 
+<br><br><br>
+
 ## Project 8 - Hybrid “Deep Learning + Physics” Computer Vision Model
 
 Here, I designed and created a deep learning model that combines computer vision deep learning and physics for the physics-based simulation. Solving multi-physics problems usually requires expensive, high-performance computers and complex code. The model helps and explores how machine learning can reduce computation time in these kinds of problems. It uses a deep learning model, specifically a convolutional neural network, to predict rough fracture permeability from digital images during the fracture deformation process. Even in extrapolation tests with different fracture roughness, the model maintained high accuracy with about 8% MAPE. I show that my method is able to speed up the numerical simulation up to 20 times faster than the conventional fully physics-based methods.
@@ -171,6 +175,9 @@ Here, I designed and created a deep learning model that combines computer vision
 
 **Paper:**  I published it in the [Engineering Applications of Artificial Intelligence](https://www.sciencedirect.com/science/article/abs/pii/S0952197623007467) journal in 2023. 
 
+<br><br><br>
+
+
 ## Project 9 - Physics-based Computer Vision Method for Energy, Oil&Gas, Climate Change and Earthquakes projects
 
 I created a research software tool (Physics-based Computer Vision Method) and methodology that takes digital images as inputs, performs predictive modelling, and identifies key performance indicators (KPIs) for energy, oil&gas and climate change projects. The model focuses on understanding and simulating how stress affects the permeability of rough fracture surfaces during the surface deformation process, using a combination of numerical contact mechanics, numerical modelling and the Stokes equation. This approach allows for the simulation of mechanical deformation and fluid flow in natural fractures with complex geometries. The software accurately predicts the stress-permeability relationship, helping to provide valuable insights for hydro-mechanical studies of geological formations. This tool significantly reduces computation time, providing quick and accurate results that can inform better decision-making in energy, oil&gas and climate change projects, such as GCCS. 
@@ -178,6 +185,8 @@ I created a research software tool (Physics-based Computer Vision Method) and me
 <p align="center"> <img src="Physics_based_Computer_Vision.png" alt="Physics_based_Computer_Vision" width="700"> </p>
 
 **Paper:**  I published it in the [Transport in Porous Media](https://link.springer.com/article/10.1007/s11242-021-01719-7), which focuses on the research on the physical and chemical aspects of the transport of mass of a fluid phase, the mass of a component of a phase, momentum and energy, in single and multiphase flow in the porous medium domain. 
+
+<br><br><br>
 
 
 ## Project 10 - ML to predict tissue of origin from mutation data
