@@ -1,4 +1,4 @@
- #  Portfolio in AI/ML/Computer Vision and Agentic
+ #  Portfolio in AI/ML/Computer Vision/Agentic
 
 ---
 
