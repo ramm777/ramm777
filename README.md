@@ -5,7 +5,7 @@
 Hello, guys! I'm a Scientist and Engineer in Machine Learning and Computational Science. Fire off an email to: 77777aidan@gmail.com
 
 
-## Project 1: AI Agent Doctor with RAG based on Verified Scientific Data using n8n.   
+## Project 1 (AI Agents): AI Agent Doctor with RAG based on Verified Scientific Data using n8n.   
 Here, I create AI Doctor Agent (chatbot) that uses only scientifically verified data from British Healthcare (NHS) website using n8n for rapid prototyping of AI agents. It is providing 24/7 access to reliable medical information for questions about symptoms and conditions, helping healthcare professionals, patients and students quickly reference medical guidelines and protocols. 
 
 Step 1: Scraping website for information about illnesses - This part starts by scraping the British official NHS website for information about illnesses, which lists various medical conditions and their links. Finally, all the processed data - the text, illness names, and embeddings - gets stored in a PostgreSQL database with special vector search capabilities.
@@ -17,6 +17,60 @@ Step 2: AI Agent connected to RAG (PostgreSQL database) - This second part creat
 **Technologies:** n8n, Web Scraping, PostgreSQL, OpenAI
 
 **Code:**  [https://github.com/ramm777/aidan_doctor_agentic_n8n](https://github.com/ramm777/aidan_doctor_agentic_n8n)
+
+## Project 2 (AI Agents): Connect MCP Client to MCP Server and Tools using n8n, Docker, WSL on Local PC 
+
+<img src="images/n8n_scheme.png" alt="n8n scheme" width="850"/>
+
+The Model Context Protocol (MCP) is a powerful open standard that allows AI systems, especially large language models (LLMs), to securely interact with external tools, services, and data sources. Top 5 Key Points of Using MCP Servers & Clients: 
+	
+1) Modular Architecture
+	MCP Client (AI) can be on AWS cloud, and MCP Server can be on a local PC, thus no need to upload confidential data to the cloud.
+2) Standardized Communication Layer
+	Any MCP Client can talk to any compliant MCP Server because of the unified JSON-RPC protocol. 
+3) Security 
+	MCP allows controlled exposure of data or functionality. MCP Server decides what to expose. 
+4) Dynamic Tools Discovery
+	You can plug in new servers (e.g., a Google Calendar MCP or a GitHub MCP) without retraining or redeploying the model.
+		
+However, it is not easy to do, and people face errors and bugs trying to do it. This project sets up an n8n MCP (Model Context Protocol) server with proper SSL certificate handling for local development using Docker and Traefik reverse proxy. When running MCP on **n8n** inside **Docker containers**, you **cannot** rely on self-signed certificates for `localhost` because:
+
+1. **Container networking causes domain mismatches**  
+   `localhost` inside a container refers to the container itself, not the host machine.
+
+2. **MCP libraries enforce HTTPS and SSE rules**  
+   - HTTPS connections must use valid, trusted SSL/TLS certificates. MCP also disables **gzip compression** for **Server-Sent Events (SSE)** on `/mcp` endpoints.
+
+3. **Certificate validation fails inside containers**  
+   - Containers don’t automatically trust self-signed certificates. Custom domains like `n8n-demo.local` may not resolve correctly in Docker or WSL.
+
+### The Solution: Reverse Proxy Architecture Using Traefik
+
+To handle SSL and domain routing cleanly, use **Traefik** as a reverse proxy in front of n8n. Key Benefits:
+
+1. **Client opens `https://n8n-demo.local`**  
+   The MCP client or browser tries to reach `https://n8n-demo.local`. Inside the Docker container, when accessing n8n-demo.local, connect to the coputer running Docker (host machine).  
+
+   ```yaml
+   extra_hosts:
+     - "n8n-demo.local:host.docker.internal"
+2. The request goes to Traefik. Traefik is listening on port 443 (HTTPS). It’s the front door for all secure traffic going to n8n.
+
+3. Traefik shows the SSL certificate (for example, one created with mkcert). The client checks the certificate and confirms that the domain name matches (`n8n-demo.local`).
+
+4. Traefik decrypts the HTTPS traffic secure request (SSL termination). Inside the Docker network, the request becomes a normal HTTP request.
+
+5. Traefik sends that decrypted HTTP request to the n8n container on port 5678.
+
+6. n8n handles the MCP request.
+
+7. Traefik re-encrypts the response. Traefik takes the plain HTTP response from n8n, encrypts it again with SSL, and sends it back to the client over HTTPS.
+
+8. The client receives a secure response
+
+**Technologies:** MPC, n8n, Docker, AI Agent
+
+**Code:**  [https://github.com/ramm777/mcp_server_and_client_with_custom_functions](https://github.com/ramm777/mcp_server_and_client_with_custom_functions)
 
 
 ## Project 3: Multi-Modal Vision-Language Transformers for Automated Radiology Report Generation from X-ray Images
