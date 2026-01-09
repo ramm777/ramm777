@@ -1,0 +1,2504 @@
+Article
+
+A 3D Geological Modeling Method Using the Transformer
+Model: A Solution for Sparse Borehole Data
+Zhenquan Hang 1 , Tao Xue 2,3, *, Jianping Chen 1 , Yujin Shi 4 , Zehang Yin 5 , Zijia Cui 1 and Guanyun Zhou 1
+1
+
+2
+3
+
+4
+5
+
+*
+
+Academic Editor: José António de
+Almeida
+
+School of Earth Science and Resources, China University of Geosciences (Beijing), Beijing 100083, China;
+hangzhenquan@email.cugb.edu.cn (Z.H.); 3s@cugb.edu.cn (J.C.); czj1563255693@gmail.com (Z.C.);
+zhou553908246@163.com (G.Z.)
+School of Information Engineering, China University of Geosciences (Beijing), Beijing 100083, China
+Frontiers Science Center for Deep-Time Digital Earth, China University of Geosciences (Beijing),
+Beijing 100083, China
+Shanghai Geological Engineering Exploration, Shanghai 200436, China; shiyujin1976@163.com
+Faculty of Science, The University of Sydney, Sydney, NSW 2006, Australia; zyin3894@uni.sydney.edu.au
+Correspondence: xuetao@cugb.edu.cn
+
+Abstract: Three-dimensional (3D) geological models are essential for geological analysis
+and mineral resource estimation. Although conventional on-site survey methods, such as
+boreholes, provide local engineering geological information for 3D geological modeling,
+accurately predicting strata in areas with sparse borehole data remains a challenge. This
+study proposes a 3D geological modeling method using the Transformer model under
+the conditions of sparse borehole data. First, a K-dimensional tree was used to identify
+boreholes adjacent to the target point, and a borehole context sequence was constructed
+using stratigraphic information from neighboring boreholes. Subsequently, the relationship
+between the target point and its adjacent borehole sequence was calculated using the
+multi-head attention mechanism of the Transformer model. Finally, trained Transformer
+encoders were used to predict the stratigraphic category of the target point, and the normalized information entropy was used to quantify uncertainty during the modeling process.
+Experimental results showed that the accuracy of the method was 0.86, outperforming the
+accuracy and uncertainty of a recurrent neural network. The root mean square error is
+smaller than the inverse distance weight and Kriging. Compared to other methods, the
+proposed method can more accurately describe the geometric shape and distribution of
+geological bodies and reveal the sedimentary laws of the study area.
+
+Received: 27 January 2025
+Revised: 27 February 2025
+
+Keywords: 3D geological modeling; transformer model; sparse data; uncertainty quantification
+
+Accepted: 13 March 2025
+Published: 15 March 2025
+Citation: Hang, Z.; Xue, T.; Chen, J.;
+Shi, Y.; Yin, Z.; Cui, Z.; Zhou, G. A 3D
+Geological Modeling Method Using
+the Transformer Model: A Solution for
+Sparse Borehole Data. Minerals 2025,
+15, 301. https://doi.org/10.3390/
+min15030301
+Copyright: © 2025 by the authors.
+Licensee MDPI, Basel, Switzerland.
+This article is an open access article
+distributed under the terms and
+conditions of the Creative Commons
+Attribution (CC BY) license
+(https://creativecommons.org/
+licenses/by/4.0/).
+
+Minerals 2025, 15, 301
+
+1. Introduction
+In engineering geology, 3D geological models constructed using 3D geological modeling technologies are very helpful for geological analysis and the quantitative estimation
+of mineral resources [1,2]. Boreholes provide accurate, direct, and detailed information
+on stratigraphic distribution, which is commonly used in 3D geological modeling [3,4].
+However, drilling techniques are typically limited by budget and terrain constraints [5,6].
+Although various 3D geological modeling methods have been developed over the past
+three decades, performing 3D geological modeling with sparse borehole data remains a
+major challenge [7,8].
+The existing 3D geological modeling methods can be divided into deterministic modeling methods and stochastic modeling methods (Table 1). On the one hand, deterministic
+modeling methods can be divided into explicit modeling and implicit modeling. Explicit
+
+https://doi.org/10.3390/min15030301
+
+Minerals 2025, 15, 301
+
+2 of 21
+
+modeling allows geologists to directly contribute and fully utilize geological knowledge.
+However, explicit modeling requires extensive interactive modifications and is labor intensive [9,10]. Implicit modeling can automate the modeling process [11]. Implicit modeling
+may not optimally use available data or include sufficient geological constraints to produce
+plausible models with consistent geological relevance [12]. For cases with sparse data, both
+explicit and implicit modeling rely on interpolation techniques as solutions. Common interpolation methods include discrete smooth interpolation [13], inverse distance weighting
+(IDW) [14], spline interpolation [15], and Kriging [16,17]. The spline and discrete smooth
+interpolation methods assume data smoothness, are subjective in parameter selection, and
+share the limitation of being isotropic interpolation techniques. In IDW, a distance attenuation parameter is uniformly applied across the study area without considering the spatial
+variability of the data [18]. As a typical geostatistical interpolation method, Kriging not
+only captures the spatial distance relationships between sample and interpolation points
+but also reflects the spatial variability of the data by creating a variogram. However, this
+method has high requirements for the distribution of data assumptions and depends on
+expert-driven parameter selection, which is subjective and limited [19,20]. In practical
+applications, borehole data are typically densely sampled along the borehole line and do
+not necessarily follow spherical, cubic, or exponential distribution models [21,22]. On the
+other hand, the stochastic modeling method can generate multiple numerical geographic
+domain models representing the inherent uncertainties of these geographic domains, which
+can better describe the spatial random distribution and uncertainty characteristics of geological blocks and geological region boundaries [23]. Stochastic modeling methods mainly
+include coupled Markov chain (CMC), stochastic Markov random field (MRF), Gaussian
+simulation, and multi-point statistics (MPS). With CMC and MRF, it is difficult to determine
+the probability of the transition matrix, which has a certain subjectivity [24–26]. Gaussian
+simulation has a limited ability to represent complex geological features. MPS uses training
+images to simulate correlations between multiple points, making it suitable for describing
+complex geological phenomena. However, MPS faces challenges when it is difficult to
+obtain complete and reliable 3D training images [27–29].
+Three-dimensional geological modeling based on deep learning has recently emerged
+as an area of active research. Studies on deep neural networks [30,31], convolutional neural
+networks (CNNs) [32,33], recurrent neural networks (RNNs) [19], graph neural networks
+(GNNs) [34,35], and generative adversarial networks (GANs) [8] have demonstrated the
+effectiveness of various deep learning algorithms in 3D geological modeling. In neural
+networks, it is not necessary to calculate the experimental variogram, and nonlinear features can be captured globally by learning the basic interrelationships within the data set.
+These advantages make deep learning a practical alternative for dealing with sparse data
+issues [36,37]. Many studies have explored deep learning methods to deal with data sparsity. Guo et al. [31] proposed a semi-supervised learning method based on pseudo-labels
+to generate pseudo-labels for unlabeled data, thereby supplementing high-confidence
+predictions for further training. Lyu et al. [8] developed a multi-scale GAN method for
+developing 3D underground geological models from limited borehole data and 3D training
+images that represent prior geological knowledge. The Transformer model, developed by
+Google researchers in 2017 [38], has been recognized as the fourth largest category of deep
+learning models after multilayer perceptron, CNNs, and RNNs [39]. Initially designed for
+machine translation, it is the foundation for various models such as BERT and generative
+pre-trained transformer (GPT), showing excellent performance in image classification and
+natural language processing [40,41]. The Transformer model uses a unique self-attention
+mechanism to simulate long-term dependencies and global relationships in the data, dynamically weighing the importance of different parts of the input, which is particularly
+
+Minerals 2025, 15, 301
+
+3 of 21
+
+beneficial for tasks that need to understand the global context [38,39]. Previous studies have
+demonstrated the effectiveness of the Transformer model in solving sparse data problems.
+Based on this model, Feng et al. [42] effectively extracted internal correlations between
+multiple traffic parameters with sparse data, while Tiwari et al. [43] used the Transformer
+model to quickly estimate diffusion tensor parameters from sparse measurements.
+Table 1. Comparison of advantages and disadvantages of 3D geological modeling methods.
+
+Modeling Methods
+
+Advantages
+
+Disadvantages
+
+It is convenient for
+geologists to participate
+directly and maximize the
+use of geological
+knowledge, and the results
+are controllable.
+
+Time-consuming,
+laborious, and subjective.
+
+Implicit method
+
+High modeling efficiency.
+
+This method cannot best
+use available data or
+contain sufficient
+geological constraints.
+
+Coupled Markov chain,
+Markov random field
+
+This method can generate
+multiple possible
+geological models,
+reflecting the uncertainty
+of geology.
+
+Using this method it is
+difficult to determine the
+transition probability
+matrix; the reliability
+depends on experience.
+
+Gaussian simulations
+
+Smooth model.
+
+The ability to represent
+complex geological
+structures is limited.
+
+Multi-point statistics
+
+This method can capture
+complex geological models;
+the generated model is
+highly consistent with the
+training image.
+
+At least one training image
+is needed to represent
+geological knowledge; the
+tuning of MPS parameters
+is also needed.
+
+Machine learning and
+deep learning
+
+It has strong objectivity, a
+strong modeling ability for
+complex nonlinear
+geological structures, and
+high modeling efficiency.
+
+High computing
+power requirements.
+
+Explicit method
+Deterministic methods
+
+Stochastic methods
+
+This study proposes a method for 3D geological modeling using the Transformer
+model under the conditions of sparse borehole data. First, the borehole data were preprocessed, and the K-dimensional tree (KD-tree) was used to identify boreholes adjacent to
+the target point. The borehole context sequence was then constructed using stratigraphic
+information from adjacent boreholes. Subsequently, feature relationships between the
+target point and its adjacent borehole sequence were calculated using the unique multihead attention mechanism of the Transformer model. Finally, Transformer encoders were
+used to predict the stratigraphic category at the target point, and normalized information
+entropy was used to quantitatively evaluate the uncertainty during the modeling process.
+The remainder of this manuscript is organized as follows: Section 2 describes details of
+the proposed method; Section 3 introduces the data preparation and experimental results;
+Section 4 discusses the results; Section 5 presents the conclusions.
+
+Minerals 2025, 15, 301
+
+4 of 21
+
+2. Materials and Methods
+
+Minerals 2025, 15, x FOR PEER REVIEW
+
+Compared to image data, borehole data exhibit clustering characteristics, with local
+concentration and overall dispersion. In this study, a method of 3D geological modeling
+using the Transformer model under conditions of sparse borehole data is proposed. The
+algorithm
+flowchart
+is shown
+in point
+Figure by
+1. This
+method predicts
+the stratigraphic classificaclassiﬁcation
+of the
+target
+performing
+data preprocessing,
+building KD-t
+tion
+of
+the
+target
+point
+by
+performing
+data
+preprocessing,
+building
+KD-tree,
+constructing
+structing borehole context sequences, and training the Transformer model. Amo
+borehole context sequences, and training the Transformer model. Among them, KD-tree is
+KD-tree is used to eﬃciently organize borehole data, borehole context sequences
+used to efficiently organize borehole data, borehole context sequences are used to provide
+to provide
+features
+of adjacent
+and
+theisTransformer
+model
+is used to
+features
+of adjacent
+boreholes,
+and theboreholes,
+Transformer
+model
+used to identify
+complex
+complex relationships
+between
+relationships
+between borehole
+contextborehole
+sequences.context sequences.
+
+Figure
+1. Algorithm
+flowchart.
+Figure
+1. Algorithm
+ﬂowchart.
+
+2.1. Data Preprocessing
+
+2.1.The
+Data
+Preprocessing
+borehole data include the borehole identifier (ID), location coordinates (X and Y),
+
+stratum
+category,
+and the
+startinclude
+and end the
+elevations
+of each
+stratum. (ID),
+The preprocessing
+of
+The
+borehole
+data
+borehole
+identiﬁer
+location coordinate
+borehole
+data was
+conducted
+as the
+follows:
+Y), stratum
+category,
+and
+start and end elevations of each stratum. The prepr
+
+(1)
+Data cleaning:
+checked for
+in each borehole’s data. For example, if
+of borehole
+dataThis
+wasstep
+conducted
+aserrors
+follows:
+the thickness of a stratum was zero, the stratum was removed. Similarly, if the start
+(1) elevation
+Data cleaning:
+This
+checked
+errors
+in each
+borehole’s
+data. For exa
+of a stratum
+was step
+less than
+the end for
+elevation
+of the
+stratum,
+it was considered
+thickness
+of a stratum
+was zero, the stratum was removed. Similarly, if
+anthe
+error,
+and the stratum
+was removed.
+(2) Data
+normalization:
+Considering
+difference
+the numberof
+ofthe
+bits stratum,
+between it wa
+elevation
+of a stratum
+was the
+lesslarge
+than
+the endinelevation
+the X and Y coordinates and the elevation, the coordinates were normalized to the
+ered an error, and the stratum was removed.
+range [0, 1]. The normalization formula is shown in Equation (1):
+
+(2) Data normalization: Considering the large diﬀerence in the number of bits
+Ii − Ielevation,
+the X and Y coordinates Iand
+the
+the coordinates were normalize
+min
+(1)
+0 =
+I
+−
+I
+max
+min is shown in Equation (1):
+range [0, 1]. The normalization
+formula
+
+where I0 is the normalized value, Ii is the original value, and Imax and Imin are the maximum
+and minimum values of the coordinates, respectively. I − I
+
+I =
+
+I
+−string,
+I a mapping between the
+Data encoding: As the stratum name was a character
+string
+and
+thenormalized
+integer was created,
+was encoded
+as anIinteger
+label for
+where
+I0 is
+the
+value,and
+Ii isthe
+thestring
+original
+value, and
+max and Imin are the m
+
+(3)
+
+and minimum values of the coordinates, respectively.
+
+(3) Data encoding: As the stratum name was a character string, a mapping betw
+string and the integer was created, and the string was encoded as an integer
+
+Minerals 2025, 15, 301
+
+5 of 21
+
+processing by the classifier. To prevent data leakage, the preprocessed borehole data
+were divided into three parts according to the borehole ID, in a specific proportion, to
+construct the training set, validation set, and test set.
+2.2. Construction of KD-Tree
+To facilitate the search for boreholes adjacent to the target point, a KD-tree was
+constructed based on the X and Y coordinates of each borehole. The KD-tree is a data
+structure widely used in computer science and computational geometry. It divides the
+data space based on the number of dimensions of each data point, enabling efficient
+organization and search of points in the multidimensional data space [44–46]. The KD-tree
+constructed in this study had two dimensions, these being the X and Y coordinates of the
+boreholes. During the construction, each node represented a data point, and the data set
+was recursively divided into subsets according to the dimensions. Equation (2) represents
+the dimension selection when the dimension k of the KD-tree is 2.
+(
+x, if d mod 2 = 0
+split_dim(d) =
+(2)
+y, if d mod 2 = 1
+where d is the depth of KD-tree, split_dim(d) represents the dimension of segmentation, and
+d mod 2 represents the remainder of d divided by 2. When split_dim(d) = x, it represents
+that the left and right subtrees of the depth are divided according to the X coordinate of the
+borehole. When split_dim(d) = y, it represents that the left and right subtrees of the depth
+are divided according to the Y coordinate of the borehole.
+The data on dimension split_dim(d) are arranged from small to large to obtain the
+data set {A1 , A2 , A3 ,. . ., An }, where A1 < A2 < A3 <. . .< An and n is the number of data
+points on dimension split_dim(d). According to Equation (3), the median of the dimension
+split_dim(d) can be calculated.
+
+m=
+
+
+A n+1 , n = 2l + 1
+2
+
+ A n2 +A n2 +1 , n = 2l
+
+(3)
+
+2
+
+where m represents the median in the current dimension, n = 2l + 1 represents n being odd,
+and n = 2l represents n being even.
+For each partition, the median of the current dimension was selected as the partition
+point, dividing the data set into two parts: the left subtree contained all coordinates smaller
+than the point, while the right subtree contained all coordinates greater than the point.
+Equation (4) is a formula for dividing subtrees.
+(
+
+Sleft = {split_dim(d) < m}
+Sright = {split_dim(d) > m}
+
+(4)
+
+where Sle f t is a left subtree divided by m and Sright is a right subtree divided by m.
+For each subset, the next dimension was recursively selected, and the division continued based on the median until each leaf node contained only one data point. Through
+this recursive space division, the KD-tree could effectively organize data, enabling nearest
+neighbor queries to be completed in logarithmic time.
+2.3. Construction of Borehole Context Sequence
+To fully exploit the stratigraphic relationship between adjacent boreholes, this study
+constructed multiple context sequences for each borehole. A given elevation in a borehole
+was treated as the target point, and the KD-tree was used to query the nearest neighboring
+
+Minerals 2025, 15, 301
+
+6 of 21
+
+borehole ID to the target point. Each nearest neighbor borehole ID was then traversed to
+extract the corresponding stratigraphic records, and features (including stratum ID, start
+and end elevations of the stratum, and X and Y coordinates) were added to the sequence
+list. The spatial information of the target point was subsequently added to the end of the
+sequence, and the stratum category of the target point was used as the prediction target for
+the Transformer model. For example, when the number of adjacent boreholes was equal
+to three (K = 3), the 1st stratum (Figure 2a), the 2nd stratum (Figure 2b), the 3rd stratum
+(Figure 2c), and the 4th stratum (Figure 2d) of the training borehole T were treated as the
+target points to construct the borehole context sequence. The borehole context sequence for 6 of 2
+Minerals 2025, 15, x FOR PEER REVIEW
+borehole T, with the 1st stratum as the target point, is shown in Figure 3. This sequence
+contains the stratigraphic features of adjacent boreholes A, B, and C, as well as the spatial
+characteristics of the target point. After constructing all the borehole context sequences, the
+sequences, the maximum length of each sequence was calculated to determine the ﬁlling
+maximum length of each sequence was calculated to determine the filling length, and each
+length, and each sequence was then ﬁlled to the maximum length to ensure uniformit
+sequence was then filled to the maximum length to ensure uniformity across all sequences,
+across all batch
+sequences,
+facilitating batch training.
+facilitating
+training.
+
+Figure
+construction
+principle
+of the
+context
+sequence.
+When the
+number
+adjacent
+Figure2.2.The
+The
+construction
+principle
+ofborehole
+the borehole
+context
+sequence.
+When
+the of
+number
+of adjacen
+boreholes
+was
+equal
+to
+three
+(K
+=
+3),
+the
+1st
+stratum
+(a),
+the
+2nd
+stratum
+(b),
+the
+3rd
+stratum
+(c),
+boreholes was equal to three (K = 3), the 1st stratum (a), the 2nd stratum (b), the 3rd stratum (c), an
+and the 4th stratum (d) of the training borehole T were treated as the target points to construct the
+the 4th stratum (d) of the training borehole T were treated as the target points to construct the bore
+borehole context sequence.
+
+hole context sequence.
+
+Figure 2. The construction principle of the borehole context sequence. When the number of adjacen
+
+boreholes was equal to three (K = 3), the 1st stratum (a), the 2nd stratum (b), the 3rd stratum (c), and
+Minerals 2025, 15, 301
+
+the 4th stratum (d) of the training borehole T were treated as the target points to construct
+7 of 21 the bore
+hole context sequence.
+
+Minerals 2025, 15, x FOR PEER REVIEW
+
+Figure
+of one
+of the
+borehole
+contextcontext
+sequences.
+This borehole
+context contex
+Figure3.3.An
+Anexample
+example
+of one
+of constructed
+the constructed
+borehole
+sequences.
+This borehole
+
+2.4.
+The Training
+the Transformer
+Model
+sequence
+theofstratigraphic
+features of
+adjacent boreholes A, B, and C, as well as the spatial
+sequencecontains
+contains
+the stratigraphic
+features
+of adjacent boreholes A, B, and C, as well as the spatia
+characteristics of the target point.
+
+characteristics
+of theTransformer
+target point. model [38] design includes both encoders and decod
+The original
+2.4.
+The
+Training
+of
+the
+Transformer
+Modelas machine translation, the input is a sentence, a
+common generation
+tasks, such
+
+Theisoriginal
+Transformer
+model In
+[38]this
+design
+includes
+both encoders
+andto
+decoders.
+In gener
+output
+a translated
+sentence.
+case,
+the decoder
+is used
+gradually
+common generation tasks, such as machine translation, the input is a sentence, and the
+output
+sequence, relying on the context information produced by the encoder.
+output is a translated sentence. In this case, the decoder is used to gradually generate
+study,
+the stratum classiﬁcation task was a classiﬁcation problem. The task was to c
+the output sequence, relying on the context information produced by the encoder. In our
+the
+stratum
+based
+on the adjacent
+context
+information
+of the
+target point
+study,
+the stratum
+classification
+task wasborehole
+a classification
+problem.
+The task was
+to classify
+the stratum
+based on
+the adjacent
+borehole
+context the
+information
+of the needed
+target point,
+rather
+than
+generating
+a new
+sequence.
+Therefore,
+model only
+to use
+the Trans
+than
+generating
+a
+new
+sequence.
+Therefore,
+the
+model
+only
+needed
+to
+use
+the
+Transformer
+encoders (as shown in Figure 4) to encode the input data, extract useful features, a
+encoders (as shown in Figure 4) to encode the input data, extract useful features, and output
+put the probability of the target point belonging to each category.
+the probability of the target point belonging to each category.
+
+Figure 4. Transformer encoder structure [47].
+
+Figure 4. Transformer encoder structure [47].
+
+To extract the characteristic relationships between the target point and its a
+borehole stratigraphic sequence, it was necessary to calculate the self-a ention
+
+Minerals 2025, 15, 301
+
+8 of 21
+
+To extract the characteristic relationships between the target point and its adjacent
+borehole stratigraphic sequence, it was necessary to calculate the self-attention mechanism.
+The calculation of self-attention can be divided into the following steps. First, each point in
+the input sequence was mapped to three different representations with dimensions through
+the input embedding layer, which were called query (Q), key (K), and value (V). Subsequently, the Q vector was matched with all K vectors using dot product multiplication. The
+resulting matrix was scaled and passed through the softmax function to obtain the attention
+scores between different points in the sequence. Finally, the attention score was multiplied
+by the V vector to generate a new representation of the input sequence. Essentially, the
+self-attention mechanism modified the representation of each point by considering the
+weighted contribution of all other points in the sequence. This allowed distant points in
+the sequence to focus on each other’s values and share important information that may
+otherwise be overlooked. The self-attention mechanism is represented by Equation (5) [38]:
+!
+QKT
+Attention(Q, K, V) = softmax √
+V
+dk
+
+(5)
+
+where Q, K, and V are the three matrices used for calculating self-attention, and dk is the
+dimension of the K matrix.
+The multi-head attention mechanism allowed the model to focus on the self-attention
+mechanism of different subspaces. Under the condition that the parameter quantity was
+generally unchanged, multi-head attention divided the three parameters, Q, K, and V, into
+multiple groups. Each group was mapped to different subspaces in the high-dimensional
+space to calculate the self-attention weights, enabling the model to focus on different parts
+of the input. After performing multiple parallel calculations, the self-attention information
+in all subspaces was merged. As self-attention was distributed differently across subspaces,
+multi-head attention was seeking for associations from different perspectives of the input
+data, making it possible to encode multiple relationships and subtle differences. The
+multi-head attention formula [38] is shown in Equation (6):
+
+MultiHead(Q, K, V) = Concat( head 1 , head 2 , · · · , head h )Wo
+
+
+K
+V
+
+head i = Attention QWQ
+i , KWi , VWi
+
+(6)
+
+Taking one of the heads in the multi-head self-attention mechanism as an example, the
+process of calculating self-attention is shown in Figure 5. The Transformer model iterates
+through each position in the borehole context sequence, computing self-attention from the
+1st, 2nd, 3rd. . . to the N-th position. As there may be long-distance dependencies between
+different stratigraphic categories, the multi-head self-attention mechanism can help the
+model identify complex associations across multiple strata.
+As the self-attention mechanism is independent of the order in the input sequence,
+position encoding was added to track the location of different points. Position encoding
+was typically introduced using sine and cosine functions, as shown in Equation (7) [38]:
+
+ PE
+
+
+pos/100002i/d
+
+
+PE(pos 2i+1) = cos pos/100002i/d
+(pos ,2i) = sin
+
+
+
+(7)
+
+where pos denotes the position in the sequence, d represents the dimension of the position
+encoding, 2i denotes the even dimension, and 2i + 1 denotes the odd dimension.
+
+Minerals 2025, 15, 301
+
+ates through each position in the borehole context sequence, computing self-a ention
+from the 1st, 2nd, 3rd ... to the N-th position. As there may be long-distance dependencie
+between diﬀerent stratigraphic categories, the multi-head self-a ention mechanism
+can
+9 of 21
+help the model identify complex associations across multiple strata.
+
+Figure
+calculation
+for one
+Figure5.5.Self-attention
+Self-a ention
+calculation
+for head.
+one head.
+
+InAs
+thethe
+actual
+training
+process,
+batch training
+can be usedoftothe
+improve
+self-a
+ention
+mechanism
+is independent
+ordermodel
+in theefficiency,
+input sequence
+with each batch processing a sequence of multiple target points. The hyperparameters of
+position encoding was added to track the location of diﬀerent points. Position encoding
+the model, such as embedding dimension, the number of heads of multi-head attention, the
+was typically introduced using sine and cosine functions, as shown in Equation (7) [38]:
+number of stacked layers of the encoder, and the learning rate, were adjusted by the grid
+search method. The standard cross-entropy
+function
+was used /as the loss function. The
+PE pos ,2i loss
+= sin
+pos/10000
+(7
+use of the Adam optimizer can well adapt to the training of the Transformer
+model. After
+PE pos 2i+1 = cos pos/10000 /
+training, model performance was evaluated on the test set using conventional classification
+evaluation
+including
+confusion
+matrix, receiver
+operating
+(ROC)
+where posindicators
+denotes the
+position
+in the sequence,
+d represents
+thecharacteristic
+dimension of
+the position
+curve,
+accuracy,
+precision,
+recall,
+F1
+score,
+and
+Kappa
+coefficient.
+encoding, 2i denotes the even dimension, and 2i + 1 denotes the odd dimension.
+
+In the actual training process, batch training
+TP + TNcan be used to improve model eﬃciency
+accuracy =
+(8)
+with each batch processing a sequence
+multiple
+TP of
++ TN
++ FP +target
+FN points. The hyperparameters o
+the model, such as embedding dimension, the number of heads of multi-head a ention
+TP
+precision
+=
+(9) by th
+the number of stacked layers of
+the encoder,
+and the learning rate, were adjusted
+TP + FP
+recall =
+F1 score = 2 ×
+
+TP
+TP + FN
+
+precision × recall
+precision + recall
+
+Kappa =
+p0 =
+
+P0 − Pc
+1 − Pc
+
+∑ni=1 xii
+∑n x x
+, pc = i=1 2i+ +i
+N
+N
+
+(10)
+(11)
+(12)
+(13)
+
+where True Positive (TP) represents the number of samples that the model correctly predicts
+as positive; True Negative (TN) represents the number of samples that the model correctly
+predicts as negative; False Positive (FP) represents the number of negative samples that the
+model incorrectly predicts as positive; and False Negative (FN) represents the number of
+positive samples that the model incorrectly predicts as negative. xii denotes the elements
+on the diagonal of the confusion matrix, xi+ denotes the sum of all elements in row i, x+i
+
+Minerals 2025, 15, 301
+
+the number of positive samples that the model incorrectly predicts as negative.
+notes the elements on the diagonal of the confusion matrix, x denotes the sum
+10 of 21
+elements in row i, x denotes the sum of all elements in column i, and N denotes t
+of all elements. p represents the proportion of observation accuracy or the cons
+denotes
+sum of the
+all elements
+in column
+i, and N denotes
+the sumcoincident
+of all elements.
+p0
+unit;
+p the
+denotes
+proportion
+of coincident
+or expected
+units.
+represents the proportion of observation accuracy or the consistency unit; pc denotes the
+proportion
+of coincidentand
+or expected
+coincident
+units.
+2.5.
+Model Prediction
+Uncertainty
+Analysis
+
+2.5. Model
+Prediction andprocess
+Uncertainty
+Analysisdividing the study area into a large number o
+The prediction
+involved
+
+TheK
+prediction
+process
+involved
+the study
+into a large number
+of grids,
+ﬁnding
+adjacent
+boreholes
+fordividing
+each grid,
+andarea
+constructing
+borehole
+context seq
+findingon
+K adjacent
+boreholes forinformation
+each grid, andof
+constructing
+context
+based
+the stratigraphic
+adjacent borehole
+boreholes.
+Thesequences
+borehole cont
+based on the stratigraphic information of adjacent boreholes. The borehole context sequence
+quence for all grids in the study area was then input into the trained Transformer
+for all grids in the study area was then input into the trained Transformer model to predict
+tothepredict
+the stratigraphic
+category
+of each
+grid (as
+stratigraphic
+category of each
+grid (as shown
+in Figure
+6). shown in Figure 6).
+
+Figure 6.
+of stratigraphic
+categories
+of unknown
+grids.
+Figure
+6.Prediction
+Prediction
+of stratigraphic
+categories
+of unknown
+grids.
+
+The softmax layer outputs the probability that each grid unit belongs to a specific
+stratum category. In this study, the normalized information entropy of each grid unit was
+calculated by combining the probability distribution to quantify the uncertainty in the
+prediction modeling process. The calculation of the normalized information entropy is
+shown in Equation (14):
+p(x)ln(p(x))
+∑
+H(X) = − x∈S
+(14)
+Smax
+where S is the possible stratum category of each target point, Smax is equal to ln (n), and n
+is the number of possible stratigraphic categories. The information entropy of each data
+point was obtained by calculating the probability p(x) of each target point across all stratum
+categories. The magnitude of the information entropy reflected the complexity of a certain
+position in the geological model. The closer the information entropy was to 0, the higher
+the certainty that the data point belonged to a specific stratum category. On the contrary,
+the closer the information entropy was to 1, the higher the uncertainty.
+
+3. Experiments and Results
+3.1. Experiments
+The test data consist of 37 boreholes located in Huangpu District, Shanghai, with
+a depth range of 85.3–134.6 m, an average depth of 103.4 m, a minimum thickness of
+0.5 m, and a maximum thickness of 45.8 m. These boreholes are distributed over an area
+of 5000 × 6200 m (as shown in Figure 7). The engineering geological layer refers to the
+stratum divided according to geological age, geological origin, material composition, and
+
+Minerals 2025, 15, 301
+
+depth range of 85.3–134.6 m, an average depth of 103.4 m, a minimum thickness of 0.5 m
+and a maximum thickness of 45.8 m. These boreholes are distributed over an area of 500
+× 6200 m (as shown in Figure 7). The engineering geological layer refers to
+the
+11 of
+21 stratum
+divided according to geological age, geological origin, material composition, and physica
+and mechanical properties of rock and soil. The study area was divided into 15 engineer
+physical
+and mechanical
+properties
+of rock and
+soil.sequence
+The study
+area wasand
+divided
+into of each
+ing geological
+layers, with
+the geological
+age,
+number,
+lithology
+15 engineering geological layers, with the geological age, sequence number, and lithology
+stratum shown in Table 2. The strata in this area are mainly composed of Quaternary loos
+of each stratum shown in Table 2. The strata in this area are mainly composed of Quaternary
+sediments, which are located in human activity sites. The stratum is characterized by th
+loose sediments, which are located in human activity sites. The stratum is characterized by
+frequent
+formation
+lenticlesand
+andpinch-outs
+pinch-outs
+issignificantly
+not signiﬁcantly
+the
+frequent
+formation of
+of lenticles
+andand
+is not
+affectedaﬀected
+by faults,by faults
+joints,
+and
+other
+fault
+structures
+[3,4].
+The
+borehole
+data
+are
+public
+data
+from
+the websit
+joints, and other fault structures [3,4]. The borehole data are public data from the website
+h ps://data.sigs.cn/sigs-service-platform/#/home
+(accessed
+January
+5, 2024).
+https://data.sigs.cn/sigs-service-platform/#/home
+(accessed
+on 5on
+January
+2024).
+
+Minerals 2025, 15, x FOR PEER REVIEW
+
+11 of 21
+
+Figure 7. Distribution map of the boreholes located in Huangpu District, Shanghai. The number in
+Figure
+7. Distribution
+of the boreholes
+in Huangpu
+District,
+The number in
+the figure
+representsmap
+the borehole
+ID, and located
+the purple
+line represents
+theShanghai.
+profile line.
+the figure represents the borehole ID, and the purple line represents the profile line.
+Table 2. Engineering geological stratigraphy of Huangpu District, Shanghai (modified after [48,49]).
+Table 2. Engineering geological stratigraphy of Huangpu District, Shanghai (modified after [48,49]).
+
+Geological Era
+
+Geological Era
+Late phase 𝑄ℎ3
+
+Holocene
+
+Late phase Qh3
+Middle phase 𝑄ℎ2
+Middle phase Qh2
+Holocene
+Early phase 𝑄ℎ1
+Early phase Qh1
+
+Upper
+Pleistocene
+
+Middle Pleistocene
+
+2
+2
+Late phase 𝑄𝑝
+Late
+3 phase Qp3
+Upper
+Pleistocene
+
+1
+Early phase Early
+𝑄𝑝31 phase Qp3
+Middle
+𝑄𝑝2
+Qp2
+Pleistocene
+
+Engineering Geological Layer
+No. Engineering Geological
+NameLayer
+No.
+Name
+①
+Fill
+②
+Brown–yellow
+silty clay
+1
+⃝
+Fill
+③
+Gray muddy
+silty
+clay
+2
+⃝
+Brown–yellow
+silty
+clay
+3
+⃝
+GrayGray
+muddy
+silty clay
+④
+muddy
+4
+⃝
+GrayGray
+muddy
+⑤1
+siltyclay
+clay
+5
+⃝1
+Gray
+silty
+clay
+⑤2
+Gray sandy clay
+5
+⃝2
+Gray
+sandy
+clay
+⑤3
+Gray
+silty
+clay
+5
+⃝3
+Gray silty clay
+⑤4
+Gray–green silty clay
+5
+⃝4
+Gray–green silty clay
+⑥
+Dark
+green–brown–yellow
+silty
+clay
+6
+Dark
+green–brown–yellow
+silty
+clay
+⃝
+⑦1
+Grass
+yellow–gray
+sandy
+silt
+7
+⃝1
+Grass yellow–gray sandy silt
+⑦2
+Gray
+yellow–gray
+powder
+sand
+7
+⃝2
+Gray
+yellow–gray
+powder
+sand
+8
+⃝
+Gray
+silty
+clay
+⑧
+Gray
+silty
+clay
+9
+⃝1
+Cyan–gray
+silty
+sand
+⑨1
+Cyan–gray
+silty
+sand
+9
+⃝2
+Gray
+gravelly
+medium
+sand
+⑨2
+Gray gravelly medium
+sand
+⑩
+Blue–gray
+silty
+clay
+Blue–gray
+silty
+clay
+
+The experimental environment for this study included PyTorch 2.1.0 and Python
+3.10. The device used is an Intel Xeon Platinum 8358P 2.60 GHz CPU and an NVIDIAA800 GPU. The grid search method was used for parameter optimization, and the optimal
+values for each parameter are shown in Table 3.
+Table 3. Transformer model parameter values.
+
+Minerals 2025, 15, 301
+
+12 of 21
+
+The experimental environment for this study included PyTorch 2.1.0 and Python 3.10.
+The device used is an Intel Xeon Platinum 8358P 2.60 GHz CPU and an NVIDIA-A800 GPU.
+The grid search method was used for parameter optimization, and the optimal values for
+each parameter are shown in Table 3.
+Table 3. Transformer model parameter values.
+
+Parameters
+
+Value
+
+Training set: validation set: test set
+Embed dims
+Num heads
+Num layers
+Learning rate
+Number of training epochs
+Loss function
+Optimizer
+Number of neighbor boreholes (k)
+
+6:2:2
+256
+8
+6
+1 × 10−5
+500
+Cross-entropy loss
+Adam
+3
+
+3.2. Results
+Table 4 shows that all accuracy indexes for the test set exceeded 0.85. The confusion
+matrix for the test set classification is shown in Figure 8. The confusion matrix displays
+the predicted and actual values for each stratum category, reflecting the reliability of the
+model’s classification results. As seen in Figure 8, the classification accuracy for most layers
+was very high, with only a few layers being misclassified as adjacent layers. The ROC curve
+shows the performance of the classifier under different thresholds. The closer the curve is
+to the upper left corner, the better the prediction performance of the model. The area under
+the ROC curve (AUC) serves as a comprehensive measure of all potential classification
+thresholds. AUC values greater than 90% are considered excellent, in the range of 75%–90%
+they are considered good, in the range of 50%–75% they are poor, and values under 50%
+represent unacceptable performance [50]. The experimental results (Figure 9) show that the
+classification performance on the test set is generally above good, with most of the results
+categorized as excellent.
+Table 4. Accuracy, precision, recall, F1 score, and Kappa Coefficient values for the test data set.
+
+Metric
+
+Value
+
+Accuracy
+Precision
+Recall
+F1 Score
+Kappa Coefficient
+
+0.86
+0.88
+0.86
+0.86
+0.85
+
+In this study, the grid size used for 3D geological modeling is 100 m × 100 m × 0.5 m,
+and the study area is divided into 50 × 62 × 271 grids. Figure 10a shows the results of
+the 3D geological model, illustrating the geometry and distribution of geological bodies.
+Figure 10b shows the fence diagrams derived from the model, which presents the stratigraphic coverage relationship inside the model. Figure 11 shows the distribution of some
+strata on the plane. It can be seen that some strata such as brown–yellow silty clay and
+grass yellow–gray sandy silt, gray sandy clay are only distributed in some areas, which
+is consistent with the sedimentary law of the delta area. In addition, Figure 12 shows the
+proportion of each stratum in the model. Figure 13 shows the comparison between the test
+set boreholes and the predicted boreholes. The predicted results align with the original
+
+Minerals 2025, 15, 301
+
+Metric
+Value
+Accuracy
+0.86
+Accuracy
+0.86
+Precision
+0.88
+Precision
+0.88
+Recall
+0.8613 of 21
+Recall
+0.86
+F1 Score
+0.86
+F1
+Score
+0.86
+Kappa Coeﬃcient
+0.85
+boreholes, including the thickness of each stratum and the sedimentary sequence in the
+Kappa Coeﬃcient
+0.85
+original boreholes.
+
+Figure 8. Confusion matrix of the test data set.
+Figure 8. Confusion matrix of the test data set.
+Figure 8. Confusion matrix of the test data set.
+
+Figure 9. ROC curve for classification performance. This dotted line is a diagonal line from the lower
+Figure 9. ROC curve for classiﬁcation performance. This do ed line is a diagonal line from
+left corner to the upper right corner, indicating that the true positive rate and false positive rate of
+Figure
+9.
+ROC
+curve
+for classiﬁcation
+performance. This
+dothe
+edtrue
+line positive
+is a diagonal
+linefalse
+fromp
+lower
+left
+corner
+toIfthe
+rightis corner,
+rate and
+the
+classifier
+are equal.
+theupper
+ROC curve
+above theindicating
+dotted line,that
+the performance
+of the classifier
+lower
+left
+corner
+to the
+upper
+right
+corner,
+indicating
+thatthe
+the
+true
+positive
+rate
+israte
+better
+than
+the random
+guess.
+If the
+curve curve
+is
+below
+dotted
+line,
+theed
+performance
+ofand
+the false po
+of
+the
+classiﬁer
+are
+equal.
+IfROC
+the
+ROC
+isthe
+above
+do
+line, the
+performance
+classifier
+is lower
+than the
+rate
+of the
+classiﬁer
+arerandom
+equal.guess.
+If the ROC curve is above the do ed line, the performance of
+
+classiﬁer is be er than the random guess. If the ROC curve is below the do ed line, the pe
+classiﬁer
+be classiﬁer
+er than the
+random
+guess.
+If the ROC
+curve is below the do ed line, the per
+mance ofisthe
+is lower
+than
+the random
+guess.
+mance of the classiﬁer is lower than the random guess.
+
+proportion of each stratum in the model. Figure 13 shows the comparison between the
+test
+testset
+setboreholes
+boreholesand
+andthe
+thepredicted
+predictedboreholes.
+boreholes.The
+Thepredicted
+predictedresults
+resultsalign
+alignwith
+withthe
+theorigioriginal
+nal boreholes,
+boreholes, including
+including the
+the thickness
+thickness of
+of each
+each stratum
+stratumand
+and the
+the sedimentary
+sedimentary sequence
+sequence in
+in
+Minerals 2025, 15, 301
+14 of 21
+the
+theoriginal
+originalboreholes.
+boreholes.
+
+Figure
+geological
+(a)
+diagrams
+(b).
+Figure10.
+10.Three-dimensional
+Three-dimensional
+geologicalmodel
+model
+(a)and
+andfence
+fence
+diagrams
+(b). (b).
+Figure 10. Three-dimensional
+geological
+model
+(a) and
+fence diagrams
+
+Figure
+of
+Figure 11. The
+distribution
+of strata.
+Figure11.
+11.The
+Thedistribution
+distribution
+ofstrata.
+strata.
+
+, x FOR PEER REVIEW
+
+14 of 21
+
+Minerals 2025, 15, x FOR PEER REVIEW
+Minerals 2025, 15, 301
+
+15 of 21
+
+Figure 12. Histograms of percentage of each stratum.
+Figure 12. Histograms of percentage of each stratum.
+Figure 12. Histograms of percentage of each stratum.
+
+Figure 13.
+Comparison
+betweenand
+the predicted
+actual and predicted
+values
+theset
+testboreholes.
+set boreholes.
+Figure 13. Comparison
+between
+the actual
+values for
+thefor
+test
+Figure 13. Comparison between the actual and predicted values for the test set boreholes.
+
+4. Discussion
+4.1. Comparison4.
+of Discussion
+the Transformer Model and Other Methods
+
+4.1. reliability
+Comparison
+theproposed
+Transformer
+Model this
+and Other
+To verify the
+ofofthe
+method,
+studyMethods
+used IDW, Kriging, and
+the reliability
+of the proposed
+method,
+study
+used 14c)
+IDW, Krigin
+RNN to construct aTo
+3Dverify
+geological
+model. Firstly,
+by comparing
+the this
+proﬁle
+(Figure
+
+Minerals 2025, 15, 301
+
+16 of 21
+
+4. Discussion
+4.1. Comparison of the Transformer Model and Other Methods
+To verify the reliability of the proposed method, this study used IDW, Kriging, and
+RNN to construct a 3D geological model. Firstly, by comparing the profile (Figure 14c)
+Minerals 2025, 15, x FOR PEER REVIEW
+15 of 21
+obtained by the Transformer model with the profiles (Figure 14a,b) obtained by traditional
+modeling methods (IDW and Kriging), it can be seen that the overall distribution of strata in
+these profiles is consistent. In detail, the transformer profile is closer to adjacent boreholes in
+than
+thestrata
+RMSE
+of as
+thegray
+IDW
+and
+Kriging
+methods.
+Then,
+by comparing
+the proﬁle
+(Figure
+some
+such
+silty
+clay
+and grass
+yellow–gray
+sandy
+silt. In addition,
+according
+14c)
+themean
+Transformer
+model
+with
+theTransformer
+proﬁle (Figure
+14d)than
+generated
+by the
+to obtained
+Table 5, theby
+root
+square error
+(RMSE)
+of the
+is smaller
+the RMSE
+of the
+IDWbe
+and
+Kriging
+methods.
+by comparing
+the profile (Figure
+obtained with
+RNN,
+it can
+seen
+that the
+proﬁleThen,
+obtained
+by the Transformer
+model 14c)
+is consistent
+by
+the
+Transformer
+model
+with
+the
+profile
+(Figure
+14d)
+generated
+by
+the
+RNN,
+it can
+the stratigraphic information from the adjacent boreholes, accurately revealing
+thebestratiseen that
+the profile
+obtained by
+thethe
+Transformer
+model
+is consistentInwith
+the stratigraphic
+graphic
+coverage
+relationship
+and
+pinch-out
+phenomenon.
+contrast,
+the model obinformation from the adjacent boreholes, accurately revealing the stratigraphic coverage
+tained by the RNN fails to capture the pinch-out phenomenon observed in the nearby
+relationship and the pinch-out phenomenon. In contrast, the model obtained by the RNN
+boreholes. In addition, the Transformer model outperforms the RNN in terms of accuracy,
+fails to capture the pinch-out phenomenon observed in the nearby boreholes. In addition,
+precision, recall, F1 score, and Kappa coeﬃcient (Figure 15). A possible explanation for
+the Transformer model outperforms the RNN in terms of accuracy, precision, recall, F1
+thisscore,
+is that
+calculation
+of 15).
+the RNN,
+information
+with
+andduring
+Kappathe
+coefficient
+(Figure
+A possible
+explanation
+forvery
+this islong
+thatinterval
+during distances
+will be lost,ofpreventing
+the establishment
+of long-term
+dependencies
+inbe
+thelost,
+context
+the calculation
+the RNN, information
+with very
+long interval
+distances will
+[51,52].
+preventing the establishment of long-term dependencies in the context [51,52].
+
+Figure
+14.14.
+Comparison
+bythe
+theIDW
+IDW
+(a),
+Kriging
+Transformer
+model
+(c), and
+Figure
+Comparisonofofproﬁles
+profiles obtained
+obtained by
+(a),
+Kriging
+(b),(b),
+Transformer
+model
+(c), and
+thethe
+RNN
+(d).
+RNN
+(d).
+Table 5. Comparison of RMSE of the Transformer model, IDW, Kriging.
+
+Table 5. Comparison of RMSE of the Transformer model, IDW, Kriging.
+RMSE of Transformer
+Borehole
+ID IDRMSERMSE
+of IDW
+Borehole
+of IDW RMSE
+RMSEofofKriging
+Kriging RMSE of Transformer Model
+Model
+3
+4.135
+3.435
+2.965
+3
+4.135
+3.435
+2.965
+17 17
+4.515 4.515
+3.947
+3.293
+3.947
+3.293
+36 36
+4.093 4.093
+3.376
+2.936
+3.376
+2.936
+Average
+3.586
+3.065
+Average
+4.248 4.248
+3.586
+3.065
+
+Minerals 2025, 15, x FOR PEER REVIEW
+Minerals 2025,
+2025,15,
+15,301
+x FOR PEER REVIEW
+Minerals
+
+16 of 21
+16
+21
+17 of
+of 21
+
+Figure 15. Accuracy, precision, recall, F1 score, and Kappa coeﬃcient of the Transformer model and
+Figure
+15.
+Figure
+15. Accuracy,
+Accuracy, precision,
+precision,recall,
+recall, F1
+F1 score,
+score, and
+and Kappa
+Kappa coefficient
+coeﬃcient of
+of the
+the Transformer
+Transformer model
+model and
+and
+the RNN.
+the
+RNN.
+the RNN.
+
+4.2. Analysis
+Analysis of
+of Model
+Model Uncertainty
+Uncertainty
+4.2.
+4.2. Analysis of Model Uncertainty
+For the
+the 3D
+3D geological
+geological model,
+model, the
+the stratum
+stratum boundary
+boundary information
+information provided
+provided by
+by the
+the
+For
+For
+the
+3D
+geological
+model,
+the
+stratum
+boundary
+information
+provided
+by
+the
+borehole data
+data is
+is accurate,
+accurate, while
+while the
+the stratum
+stratum boundary
+boundary outside
+outside the
+the borehole
+borehole data
+data area
+area is
+is
+borehole
+borehole
+data
+isInaccurate,
+while
+the stratum
+boundary
+outside
+theintroduced
+borehole data
+area is
+predicted
+[31].
+this
+study,
+normalized
+information
+entropy
+was
+to
+quantify
+predicted [31]. In this study, normalized information entropy was introduced to quantify
+predicted
+[31]. In
+this study,
+normalized
+information
+entropy 3D
+wasnormalized
+introducedinformation
+to quantify
+the uncertainty
+uncertainty
+during
+the modeling
+modeling
+process.
+The visualized
+visualized
+the
+during
+the
+process.
+The
+3D normalized
+information
+the
+uncertainty
+during
+the
+modeling
+process.
+The
+visualized
+3D
+normalized
+information
+entropy model
+model (Figure
+(Figure 16)
+16) shows
+shows the
+the uncertainty
+uncertainty at
+at different
+diﬀerent positions
+positions within
+within the
+the model
+model
+entropy
+entropy
+model
+(Figure
+16)
+shows
+the
+uncertainty
+at
+diﬀerent
+positions
+within
+the
+model
+and profile.
+proﬁle. Figure
+Figure 16
+16 reveals
+reveals that
+that the
+the uncertainty
+uncertainty of
+of the
+the region
+region at
+at the
+the boundaries
+boundaries of
+of the
+the
+and
+and
+proﬁle.
+Figure
+16
+reveals isthat
+the uncertainty
+of the region
+at areas.
+the boundaries
+of the
+strata
+is
+high,
+as
+the
+classiﬁer
+susceptible
+to
+interference
+in
+these
+In
+addition,
+the
+strata is high, as the classifier is susceptible to interference in these areas. In addition, the
+strata
+is
+high,
+as
+the
+classiﬁer
+is
+susceptible
+to
+interference
+in
+these
+areas.
+In
+addition,
+the
+RNN also
+also shows
+shows high
+high uncertainty
+uncertainty in
+in the
+the interior
+interior of
+of some
+some strata,
+strata, especially
+especially in
+in the
+the strata
+strata
+RNN
+RNN
+also
+shows
+high uncertainty
+in themodel
+interior
+of someless
+strata,
+especially
+inthe
+theTransstrata
+above
+−60
+m,
+indicating
+that
+the
+RNN
+performs
+eﬀectively
+than
+above −60 m, indicating that the RNN model performs less effectively than the Transformer
+above
+m, indicating
+that
+the RNN
+model
+performs
+lessstrata
+eﬀectively
+thanmthe
+Transformer−60
+model.
+The possible
+reason
+is that
+the thickness
+of the
+above
+is thinner
+model.
+The
+possible
+reason is
+that the
+thickness
+of the strata
+above −
+60 m−60
+is thinner
+than
+former
+model.
+The
+possible
+reason
+is
+that
+the
+thickness
+of
+the
+strata
+above
+−60
+m
+is
+thinner
+than
+that
+below
+−60
+m,
+and
+RNN
+does
+not
+capture
+the
+complex
+stratigraphic
+relationship.
+that below −60 m, and RNN does not capture the complex stratigraphic relationship.
+than that below −60 m, and RNN does not capture the complex stratigraphic relationship.
+
+Figure16.
+16.Three-dimensional
+Three-dimensional
+normalized
+information
+entropy
+model
+the Transformer
+Figure
+normalized
+information
+entropy
+model
+for (a)for
+the(a)
+Transformer
+model
+Figure
+16.
+Three-dimensional
+normalized
+information
+entropy
+model
+for
+(a)
+the
+Transformer
+and
+(b) and
+the RNN
+theand
+profile
+(c) the
+model and
+(d) the
+model
+(b) theand
+RNN
+the for
+proﬁle
+forTransformer
+(c) the Transformer
+model
+andRNN.
+(d) the RNN.
+model and (b) the RNN and the proﬁle for (c) the Transformer model and (d) the RNN.
+
+Minerals 2025, 15, 301
+
+18 of 21
+
+4.3. Advantages and Disadvantages of the Proposed Method
+The formation and evolution of geological structures and phenomena are challenging
+to describe because they are accompanied by a high degree of nonlinearity. Deep learning methods can extract high-order features from complex structures [53,54]. Although
+borehole data provide accurate stratigraphic distribution information, budget and terrain
+constraints often limit the availability of borehole data, making accurate stratigraphic prediction in sparse data areas a challenge. Traditional interpolation methods fail to account
+for the anisotropy between borehole data points. The self-attention mechanism in the
+Transformer model completely replaces the cyclic layer, enabling the analysis of longer
+input sequences [55]. While the Transformer model has achieved significant success in
+natural language processing and other fields, its application to 3D geological modeling is
+rare, particularly under the conditions of sparse borehole data. By using the Transformer
+model to extract relationships between different boreholes, the proposed method effectively
+utilizes limited borehole data. It improves modeling accuracy in sparse data areas and
+provides a more reliable basis for geological analysis and mineral resource estimation.
+In many fields, only sparse measurement data can be obtained due to the limitation of
+measurement equipment, cost considerations, or the difficulty of data acquisition. The idea
+of the proposed method can be extended to solve the problem of modeling with sparse
+measurement data; for example, groundwater modeling, medical image modeling, traffic
+flow prediction, etc.
+Although the proposed method can learn complex geological laws from borehole data,
+effectively integrating the prior knowledge and experience of geologists into the model
+is still a problem to be solved. A possible solution is to introduce multi-source data such
+as geological profile data, geophysical data, and geological structure data, and convert
+these data into virtual boreholes and geological constraints [56,57]. The next research will
+explore the solution further.
+
+5. Conclusions
+In this study, a method for 3D geological modeling using the Transformer model
+under conditions of sparse borehole data is proposed. The borehole context sequence is
+constructed by using the stratigraphic information from adjacent boreholes and is input into
+the Transformer encoders. The model calculates the multi-head self-attention for each part
+of the borehole context sequence to quantify the relationship between the target point and
+its adjacent borehole strata. The experimental results show an accuracy of 0.86, with better
+classification accuracy and lower uncertainty compared to an RNN. In addition, the RMSE
+of this method is smaller than IDW and Kriging. A comparison with the IDW, Kriging,
+and RNN results demonstrates that this method more accurately reveals the geometric
+shape and distribution of the geological body, which aligns with the sedimentary laws
+of the region. Compared with the deterministic modeling method, this method allows
+for uncertainty assessment. This method holds significant practical value in geological
+engineering, mineral resource exploration, and other fields.
+Author Contributions: Conceptualization, Z.H., T.X., and J.C.; methodology, Z.H., T.X., and J.C.;
+software, Z.H. and Z.Y.; validation, Z.H., T.X., and J.C.; formal analysis, Z.H., T.X., and Z.Y.; investigation, Z.H., T.X., and Y.S.; resources, T.X. and Y.S.; data curation, Y.S. and Z.Y.; writing—original draft
+preparation, Z.H. and T.X.; writing—review and editing, Z.H., T.X., J.C., and G.Z.; visualization, Z.H.
+and Z.C.; supervision, T.X.; project administration, T.X.; funding acquisition, T.X. All authors have
+read and agreed to the published version of the manuscript.
+
+Minerals 2025, 15, 301
+
+19 of 21
+
+Funding: This research was funded by The Major Basic Survey Project of Shanghai Municipal
+Bureau of Planning and Natural Resources: Evaluation and Application of Geological Resources and
+Environment Survey in Shanghai’s Post-Industrialization Period: SHXM-00-20180425-5255, SHXM00-20190513-1217, and SHXM-00-2020401-0282; “Deep-time Digital Earth” Science and Technology
+Leading Talents Team Funds for the Central Universities for the Frontiers Science Center for Deeptime Digital Earth, China University of Geosciences (Beijing): 2652023001.
+Data Availability Statement: The data presented in this study are available on request from the
+corresponding author. The data are not publicly available due to privacy.
+Acknowledgments: We thank the China University of Geosciences (Beijing) for the computing
+resource support with the high-performance computing platform.
+Conflicts of Interest: The authors declare no conflicts of interest.
+
+Abbreviations
+The following abbreviations are used in this manuscript:
+3D
+KD
+IDW
+CMC
+MRF
+MPS
+CNN
+RNN
+GAN
+GPT
+ID
+ROC
+AUC
+RMSE
+
+Three-dimensional
+K-dimensional
+Inverse distance weighting
+Coupled Markov chain
+Markov random field
+Multi-point statistics
+Convolutional neural network
+Recurrent neural network
+Generative adversarial network
+Generative pre-trained transformer
+Identifier
+Receiver operating characteristic
+Area under the curve
+Root mean square error
+
+References
+1.
+2.
+3.
+4.
+5.
+6.
+7.
+8.
+9.
+10.
+11.
+
+Lyu, M.; Ren, B.; Wu, B.; Tong, D.; Ge, S.; Han, S. A parametric 3D geological modeling method considering stratigraphic interface
+topology optimization and coding expert knowledge. Eng. Geol. 2021, 293, 106300. [CrossRef]
+Zhou, G.; Chen, J.; An, W.; Liu, C.; Li, W. Three-dimensional mineral prospectivity mapping based on natural language processing
+and random forests: A case study of the Xiyu diamond deposit, China. Ore Geol. Rev. 2024, 169, 106082. [CrossRef]
+Ji, G.; Wang, Q.; Zhou, X.; Cai, Z.; Zhu, J.; Lu, Y. An automated method to build 3D multi-scale geological models for engineering
+sedimentary layers with stratum lenses. Eng. Geol. 2023, 317, 107077. [CrossRef]
+Zhu, L.; Zhang, C.; Li, M.; Pan, X.; Sun, J. Building 3D solid models of sedimentary stratigraphic systems from borehole data: An
+automatic method and case studies. Eng. Geol. 2011, 127, 1–13. [CrossRef]
+Yeh, C.H.; Lu, Y.C.; Khoshnevisan, S.; Juang, C.H.; Tien, Y.M.; Dong, J.Y. LiDAR-based 3D litho-stratigraphic models calibrated
+with limited boreholes. Engineering Geology. 2024, 332. [CrossRef]
+Chen, G.; Zhu, J.; Qiang, M.; Gong, W. Three-dimensional site characterization with borehole data—A case study of Suzhou area.
+Eng. Geol. 2018, 234, 65–82. [CrossRef]
+Qiu, Y.; Zhang, N.; Yin, Z.; Wang, Y.; Xu, C.; Zhang, P. Novel multi-spatial receptive field (MSRF) XGBoost method for predicting
+geological cross-section based on sparse borehole data. Eng. Geol. 2024, 338, 107604. [CrossRef]
+Lyu, B.; Wang, Y.; Shi, C. Multi-scale generative adversarial networks (GAN) for generation of three-dimensional subsurface
+geological models from limited boreholes and prior geological knowledge. Comput. Geotech. 2024, 170, 106336. [CrossRef]
+Hou, W.; Yang, L.; Deng, D.; Ye, J.; Clarke, K.; Yang, Z.; Zhuang, W.; Liu, J.; Huang, J. Assessing quality of urban underground
+spaces by coupling 3D geological models: The case study of Foshan city, South China. Comput. Geosci. 2016, 89, 1–11. [CrossRef]
+Kessler, H.; Mathers, S.; Sobisch, H.-G. The capture and dissemination of integrated 3D geospatial knowledge at the British
+Geological Survey using GSI3D software and methodology. Comput. Geosci. 2009, 35, 1311–1321. [CrossRef]
+Wang, J.; Zhao, H.; Bi, L.; Wang, L. Implicit 3D Modeling of Ore Body from Geological Boreholes Data Using Hermite Radial
+Basis Functions. Minerals 2018, 8, 443. [CrossRef]
+
+Minerals 2025, 15, 301
+
+12.
+
+13.
+14.
+15.
+16.
+
+17.
+18.
+19.
+20.
+21.
+22.
+23.
+
+24.
+25.
+26.
+27.
+28.
+29.
+30.
+31.
+
+32.
+33.
+34.
+35.
+36.
+37.
+
+20 of 21
+
+Jessell, M.; Aillères, L.; De Kemp, E.; Lindsay, M.; Wellmann, F.; Hillier, M.; Laurent, G.; Carmichael, T.; Martin, R. Next Generation
+Three-Dimensional Geologic Modeling and Inversion. In Proceedings of the SEG Conference on Keystone—Building Exploration
+Capability for the 21st Century, Keystone, CO, USA, 27–30 September 2014.
+Mallet, J.L. Discrete modeling for natural objects. J. Int. Assoc. Math. Geol. 1997, 29, 199–219. [CrossRef]
+Liu, H.; Chen, S.; Hou, M.; He, L. Improved inverse distance weighting method application considering spatial autocorrelation in
+3D geological modeling. Earth Sci. Informatics 2019, 13, 619–632. [CrossRef]
+Jātnieks, J.; Popovs, K.; Saks, T. A comprehensive approach to the 3D geological modelling of sedimentary basins: Example of
+Latvia, the central part of the Baltic Basin. Estonian J. Earth Sci. 2015, 64, 173–188. [CrossRef]
+Calcagno, P.; Chilès, J.P.; Courrioux, G.; Guillen, A. Geological modelling from field data and geological knowledge Part I.
+Modelling method coupling 3D potential-field interpolation and geological rules. Phys. Earth Planet. Inter. 2008, 171, 147–157.
+[CrossRef]
+von Harten, J.; de la Varga, M.; Hillier, M.; Wellmann, F. Informed Local Smoothing in 3D Implicit Geological Modeling. Minerals
+2021, 11, 1281. [CrossRef]
+Lu, G.Y.; Wong, D.W. An adaptive inverse-distance weighting spatial interpolation technique. Comput. Geosci. 2008, 34, 1044–1055.
+[CrossRef]
+Zhou, C.; Ouyang, J.; Ming, W.; Zhang, G.; Du, Z.; Liu, Z. A Stratigraphic Prediction Method Based on Machine Learning. Appl.
+Sci. 2019, 9, 3553. [CrossRef]
+Smirnoff, A.; Boisvert, E.; Paradis, S.J. Support vector machine for 3D modelling from sparse geological information of various
+origins. Comput. Geosci. 2008, 34, 127–143. [CrossRef]
+Sun, L.; Wei, Y.; Cai, H.; Yan, J.; Xiao, J. Improved Fast Adaptive IDW Interpolation Algorithm based on the Borehole Data Sample
+Characteristic and Its Application. J. Physics Conf. Ser. 2019, 1284, 012074. [CrossRef]
+Wang, Y.; Akeju, O.V.; Zhao, T. Interpolation of spatially varying but sparsely measured geo-data: A comparative study. Eng.
+Geol. 2017, 231, 200–217. [CrossRef]
+Fouedjio, F.; Scheidt, C.; Yang, L.; Achtziger-Zupančič, P.; Caers, J. A geostatistical implicit modeling framework for uncertainty
+quantification of 3D geo-domain boundaries: Application to lithological domains from a porphyry copper deposit. Comput.
+Geosci. 2021, 157, 104931. [CrossRef]
+Qi, X.-H.; Li, D.-Q.; Phoon, K.-K.; Cao, Z.-J.; Tang, X.-S. Simulation of geologic uncertainty using coupled Markov chain. Eng.
+Geol. 2016, 207, 129–140. [CrossRef]
+Gong, W.; Zhao, C.; Juang, C.H.; Tang, H.; Wang, H.; Hu, X. Stratigraphic uncertainty modelling with random field approach.
+Comput. Geotech. 2020, 125, 103681. [CrossRef]
+Li, Z.; Wang, X.; Wang, H.; Liang, R.Y. Quantifying stratigraphic uncertainties by stochastic simulation techniques based on
+Markov random field. Eng. Geol. 2016, 201, 106–122. [CrossRef]
+Chen, Q.; Liu, G.; Ma, X.; Li, X.; He, Z. 3D stochastic modeling framework for Quaternary sediments using multiple-point
+statistics: A case study in Minjiang Estuary area, southeast China. Comput. Geosci. 2020, 136, 104404. [CrossRef]
+Zhao, Y.; Chen, J.; Yang, S.; He, K.; Shimada, H.; Sasaoka, T. A Multi-Point Geostatistical Modeling Method Based on 2D Training
+Image Partition Simulation. Mathematics 2023, 11, 4900. [CrossRef]
+Abdollahifard, M.J.; Baharvand, M.; Mariéthoz, G. Efficient training image selection for multiple-point geostatistics via analysis
+of contours. Comput. Geosci. 2019, 128, 41–50. [CrossRef]
+Kim, H.-S.; Ji, Y. Three-dimensional geotechnical-layer mapping in Seoul using borehole database and deep neural network-based
+model. Eng. Geol. 2022, 297, 106489. [CrossRef]
+Guo, J.; Xu, X.; Wang, L.; Wang, X.; Wu, L.; Jessell, M.; Ogarko, V.; Liu, Z.; Zheng, Y. GeoPDNN 1.0: A semi-supervised deep
+learning neural network using pseudo-labels for three-dimensional shallow strata modelling and uncertainty analysis in urban
+areas from borehole data. Geosci. Model Dev. 2024, 17, 957–973. [CrossRef]
+Bi, Z.; Wu, X.; Li, Z.; Chang, D.; Yong, X. DeepISMNet: Three-dimensional implicit structural modeling with convolutional neural
+network. Geosci. Model Dev. 2022, 15, 6841–6861. [CrossRef]
+Jessell, M.; Guo, J.; Li, Y.; Lindsay, M.; Scalzo, R.; Giraud, J.; Pirot, G.; Cripps, E.; Ogarko, V. Into the Noddyverse: A massive data
+store of 3D geological models for machine learning and inversion applications. Earth Syst. Sci. Data 2022, 14, 381–392. [CrossRef]
+Hillier, M.; Wellmann, F.; Brodaric, B.; de Kemp, E.; Schetselaar, E. Three-Dimensional Structural Geological Modeling Using
+Graph Neural Networks. Math. Geosci. 2021, 53, 1725–1749. [CrossRef]
+Han, S.; Zhang, Y.; Wang, J.; Tong, D.; Lyu, M. Graph neural network-based topological relationships automatic identification of
+geological boundaries. Comput. Geosci. 2024, 188, 105621. [CrossRef]
+Battalgazy, N.; Valenta, R.; Gow, P.; Spier, C.; Forbes, G. Addressing Geological Challenges in Mineral Resource Estimation: A
+Comparative Study of Deep Learning and Traditional Techniques. Minerals 2023, 13, 982. [CrossRef]
+Zhou, Y.Z.; Wang, J.; Zuo, R.G.; Xiao, F.; Shen, W.J.; Wang, S.G. Machine learning, deep learning and Python language in field of
+geology. Acta Petrologica Sinica. 2018, 34, 3173–3178.
+
+Minerals 2025, 15, 301
+
+38.
+
+39.
+40.
+41.
+42.
+43.
+44.
+45.
+46.
+47.
+48.
+49.
+
+50.
+51.
+
+52.
+53.
+54.
+55.
+56.
+57.
+
+21 of 21
+
+Vaswani, A.; Shazeer, N.; Parmar, N.; Uszkoreit, J.; Jones, L.; Gomez, A.N.; Kaiser, L.; Polosukhin, I. Attention Is All You
+Need. In Proceedings of the 31st Annual Conference on Neural Information Processing Systems (NIPS), Long Beach, CA, USA,
+4–9 December 2017.
+Wei, J.; Wang, Z.; Li, Z.; Li, Z.; Pang, S.; Xi, X.; Cribb, M.; Sun, L. Global aerosol retrieval over land from Landsat imagery
+integrating Transformer and Google Earth Engine. Remote Sens. Environ. 2024, 315, 114404. [CrossRef]
+Zhao, Y.; Zhang, J.; Zong, C. Transformer: A General Framework from Machine Translation to Others. Mach. Intell. Res. 2023, 20,
+514–538. [CrossRef]
+Li, Y.H.; Yao, T.; Pan, Y.W.; Mei, T. Contextual Transformer Networks for Visual Recognition. IEEE Trans. Pattern Anal. Mach.
+Intell. 2023, 45, 1489–1500. [CrossRef]
+Feng, R.; Li, Z.; Liu, B.; Ding, Y. A Joint Spatiotemporal Prediction and Image Confirmation Model for Vehicle Trajectory
+Concatenation with Low Detection Rates. IEEE Trans. Intell. Transp. Syst. 2024, 25, 11701–11715. [CrossRef]
+Tiwari, A.; Singh, R.K.; Shigwan, S.J. SwinDTI: Swin transformer-based generalized fast estimation of diffusion tensor parameters
+from sparse data. Neural Comput. Appl. 2023, 36, 3179–3196. [CrossRef]
+Kakde, H.M. Range Searching Using kd Tree; Florida State University: Tallahassee, FL, USA, 2005.
+Anzola, J.; Pascual, J.; Tarazona, G.; Crespo, R.G. A Clustering WSN Routing Protocol Based on k-d Tree Algorithm. Sensors 2018,
+18, 2899. [CrossRef] [PubMed]
+Tiwari, V.R. Developments in KD tree and KNN searches. Int. J. Comput. Appl. 2023, 975, 8887. [CrossRef]
+Castellucci, G.; Bellomaria, V.; Favalli, A.; Romagnoli, R. Multi-lingual intent detection and slot filling in a joint bert-based model.
+arXiv 2019, arXiv:1907.02884.
+Lan, L.; Zhang, Q.; Zhu, W.; Ye, G.; Shi, Y.; Zhu, H. Geotechnical characterization of deep Shanghai clays. Eng. Geol. 2022,
+307, 106794. [CrossRef]
+Shi, Y.J.; Yan, X.X.; Wang, J.H.; Fang, Z.; Li, B. Evaluation of Engineering Geological Condition in Shanghai Coastal Area. In
+Proceedings of the International Symposium on Coastal Engineering Geology (ISCEG), Shanghai, China, 20–21 September 2012;
+Tongji University: Shanghai, China, 2012.
+Ray, P.; Le Manach, Y.; Riou, B.; Houle, T.T.; Warner, D.S. Statistical Evaluation of a Biomarker. Anesthesiology 2010, 112, 1023–1040.
+[CrossRef]
+Tian, T.L.; Song, C.; Ting, J.; Huang, H.Y. A French-to-English Machine Translation Model Using Transformer Network. In
+Proceedings of the 8th International Conference on Information Technology and Quantitative Management (ITQM)—Developing
+Global Digital Economy after COVID-19, Chengdu, China, 9–11 July 2021.
+Huang, Z.; Wang, P.; Wang, J.; Miao, H.; Xu, J.; Zhang, P. Improving Transformer Based End-to-End Code-Switching Speech
+Recognition Using Language Identification. Appl. Sci. 2021, 11, 9106. [CrossRef]
+Yang, Z.; Chen, Q.; Cui, Z.; Liu, G.; Dong, S.; Tian, Y. Automatic reconstruction method of 3D geological models based on deep
+convolutional generative adversarial networks. Comput. Geosci. 2022, 26, 1135–1150. [CrossRef]
+Fan, W.; Liu, G.; Chen, Q.; Cui, Z.; Yang, Z.; Huang, Q.; Wu, X. Geological model automatic reconstruction based on conditioning
+Wasserstein generative adversarial network with gradient penalty. Earth Sci. Informatics 2023, 16, 2825–2843. [CrossRef]
+Castangia, M.; Grajales, L.M.M.; Aliberti, A.; Rossi, C.; Macii, A.; Macii, E.; Patti, E. Transformer neural networks for interpretable
+flood forecasting. Environ. Model. Softw. 2023, 160, 105581. [CrossRef]
+Zhu, L.-F.; Li, M.-J.; Li, C.-L.; Shang, J.-G.; Chen, G.-L.; Zhang, B.; Wang, X.-F. Coupled modeling between geological structure
+fields and property parameter fields in 3D engineering geological space. Eng. Geol. 2013, 167, 105–116. [CrossRef]
+Zhang, Q.; Zhu, H. Collaborative 3D geological modeling analysis based on multi-source data standard. Eng. Geol. 2018, 246,
+233–244. [CrossRef]
+
+Disclaimer/Publisher’s Note: The statements, opinions and data contained in all publications are solely those of the individual
+author(s) and contributor(s) and not of MDPI and/or the editor(s). MDPI and/or the editor(s) disclaim responsibility for any injury to
+people or property resulting from any ideas, methods, instructions or products referred to in the content.
+
+
